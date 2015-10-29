@@ -7,12 +7,16 @@ if not os.path.exists('cache'):
 
 repo_dicts = []
 for path in [
+  # libs that have worked well
   'twbs/bootstrap', 'kennethreitz/requests', 'jasmine/jasmine', 'rails/rails',
-  'meteor/meteor', 'facebook/react', 'angular/angular.js', 'angular/angular',
-  'tax/python-requests-aws',
+  'angular/angular.js', 'tax/python-requests-aws',
 
-  'sindresorhus/atom-jshint', 'npm/npm', 'angular-ui-tree/angular-ui-tree', 'boto/boto',
-  'karma-runner/karma', 'rupa/z', 'lsegal/atom-runner']:
+  # libs I haven't tried
+  'Microsoft/TypeScript', 'meteor/meteor', 'facebook/react',  'angular/angular',
+
+  # libs that have given me trouble
+  'sindresorhus/atom-jshint', 'npm/npm', 'angular-ui-tree/angular-ui-tree',
+  'boto/boto', 'rupa/z', 'lsegal/atom-runner']:
   cache_path = os.path.join('cache', path.replace('/', '_') + '.txt')
   if not os.path.exists(cache_path):
     print 'pulling info:', cache_path
