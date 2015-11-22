@@ -53,15 +53,14 @@ for path in [
   repo_dicts.append(repo_dict)
 
 for repo_dict in sorted(repo_dicts, key=lambda d: -d['score']):
-  print '       path:', repo_dict['path']
-  print '      stars:', repo_dict['stargazers_count']
-  print '     issues:', repo_dict['open_issues_count']
-  print ' has_issues:', repo_dict['has_issues']
-
-  print '        age:', repo_dict['age']
-  print 'star/issues:', repo_dict['stargazers_count'] / repo_dict['open_issues_count']
-  print '   star/age:', repo_dict['stargazers_count'] / repo_dict['age'].days
-  print '      score:', repo_dict['score']
+  print '        path:', repo_dict['path']
+  print '       stars:', repo_dict['stargazers_count']
+  print '      issues:', repo_dict['open_issues_count']
+  print '  has_issues:', repo_dict['has_issues']
+  print '         age:', repo_dict['age']
+  print 'stars/issues:', repo_dict['stargazers_count'] / repo_dict['open_issues_count']
+  print '   stars/age:', repo_dict['stargazers_count'] / repo_dict['age'].days
+  print '       score:', repo_dict['score']
   print
 
 printed_suck_line = False
