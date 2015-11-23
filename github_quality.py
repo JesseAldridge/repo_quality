@@ -1,6 +1,7 @@
-import json, os, re
+import json, os, re, getpass
 
 import requests, arrow
+from requests import auth
 
 def pull_most_starred():
   resp = requests.get(
@@ -17,14 +18,19 @@ if not os.path.exists('cache'):
   os.mkdir('cache')
 
 repo_dicts = []
+auth = None
+use_auth = False
 for path in [
   # libs that have worked well
   'twbs/bootstrap', 'kennethreitz/requests', 'jasmine/jasmine', 'rails/rails',
   'angular/angular.js', 'tax/python-requests-aws', 'django/django', 'mitsuhiko/flask',
   'npm/npm', 'asweigart/pyperclip',
 
-  # libs I haven't tried
+  # libs I haven't tried much
   'Microsoft/TypeScript', 'meteor/meteor', 'facebook/react', 'angular/angular',
+  'strongloop/express', 'dscape/nano', 'Level/levelup', 'felixge/node-mysql',
+  'mongodb/node-mongodb-native', 'brianc/node-postgres', 'NodeRedis/node_redis',
+  'mapbox/node-sqlite3',
 
   # libs that have given me trouble
   'sindresorhus/atom-jshint', 'angular-ui-tree/angular-ui-tree',
@@ -32,9 +38,14 @@ for path in [
   cache_path = os.path.join('cache', path.replace('/', '_') + '.txt')
   if not os.path.exists(cache_path):
     print 'pulling info:', cache_path
-    resp = requests.get('https://api.github.com/repos/' + path)
-    with open(cache_path, 'w') as f:
-      f.write(json.dumps(json.loads(resp.content), indent=2))
+    if use_auth and not auth:
+      auth = auth.HTTPBasicAuth('JesseAldridge', getpass.getpass())
+    resp = requests.get(
+      'https://api.github.com/repos/' + path, auth=auth)
+    print 'xrate-limit-remaining:', resp.headers['x-ratelimit-remaining']
+    if 'created_at' in resp.content:
+      with open(cache_path, 'w') as f:
+        f.write(json.dumps(json.loads(resp.content), indent=2))
 
   with open(cache_path) as f:
     repo_dict = json.loads(f.read())
@@ -48,8 +59,9 @@ for path in [
   # (need to hardcode issue counts for projects which don't use github for issues)
   issue_count = (
     repo_dict['open_issues_count'] if repo_dict['has_issues'] else
-    {'django/django':1209}[path])
-  repo_dict['score'] += repo_dict['stargazers_count'] / issue_count * 20
+    {'django/django':1209, 'mongodb/node-mongodb-native':0}[path])
+  repo_dict['score'] += (
+    repo_dict['stargazers_count'] / issue_count * 20 if issue_count > 0 else 0)
   repo_dicts.append(repo_dict)
 
 for repo_dict in sorted(repo_dicts, key=lambda d: -d['score']):
