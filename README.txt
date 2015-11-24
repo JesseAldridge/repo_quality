@@ -4,4 +4,8 @@ This project uses simple heuristics in an attempt to roughly score the quality o
 GitHub.  It currently takes into account the project's number of stars, its age, and the
 number of open issues it has.
 
+Other (much more elaborate) projects in the domain of dubious metrics:
+  http://db-engines.com/en/ranking
+  http://www.tiobe.com/index.php/content/paperinfo/tpci/index.html
+
 MIT License
