@@ -24,7 +24,7 @@ for path in [
   # libs that have worked well
   'twbs/bootstrap', 'kennethreitz/requests', 'jasmine/jasmine', 'rails/rails',
   'angular/angular.js', 'tax/python-requests-aws', 'django/django', 'mitsuhiko/flask',
-  'npm/npm', 'asweigart/pyperclip', 'JesseAldridge/github_quality',
+  'npm/npm', 'asweigart/pyperclip', 'JesseAldridge/github_quality', 'fabric/fabric',
 
   # libs I haven't tried much
   'Microsoft/TypeScript', 'meteor/meteor', 'facebook/react', 'angular/angular',
@@ -33,7 +33,7 @@ for path in [
   'mapbox/node-sqlite3', 'mafintosh/mongojs', 'tornadoweb/tornado', 'gevent/gevent',
   'percolatestudio/meteor-migrations', 'Polymer/polymer', 'Automattic/mongoose',
   'nodejs/node', 'sequelize/sequelize', 'Automattic/monk', 'balderdashy/waterline',
-  'balderdashy/sails',
+  'balderdashy/sails', 'playframework/playframework', 'pyinvoke/invoke',
 
   # libs that have given me trouble
   'sindresorhus/atom-jshint', 'angular-ui-tree/angular-ui-tree',
