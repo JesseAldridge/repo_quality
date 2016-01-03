@@ -16,8 +16,11 @@ def deploy_server():
     proj_path, env.user, env.hosts[0]))
   api.sudo('pkill -HUP gunicorn')
 
-# def download_db():
-#     api.local(
-#         ('scp ubuntu@{host}:'
-#          '~/{proj_name}/stuff/db.json remote_db.json').format(
-#             host=env.hosts[0], proj_name=proj_name))
+@api.task
+def fetch_log():
+  log_path = os.path.join(proj_name, )
+  command = "rsync {}@{}:{} .".format(env.user, env.hosts[0], log_path)
+  api.local(command)
+  local_path = os.path.basename(log_path)
+  api.local('tail -n 100 {}'.format(local_path))
+  os.remove(local_path)

@@ -12,6 +12,8 @@ app.jinja_env.variable_end_string=')))'
 app.comment_start_string='((#'
 app.comment_end_string='#))'
 
+mean_stars_per_issue = github_quality.get_mean_stars_per_issue()
+
 @app.route('/')
 def index():
   print 'hello'
@@ -34,7 +36,7 @@ class DateTimeEncoder(json.JSONEncoder):
 def query_repo(username, repo_name):
   print 'request.args:', request.args
   repo = '/'.join((username, repo_name))
-  repo_dict = github_quality.pull_repo(repo)
+  repo_dict = github_quality.pull_repo(repo, mean_stars_per_issue, auth=config.auth_)
 
   with open(os.path.join(config.cache_dir_path, 'min_max.json')) as f:
     min_max = json.loads(f.read())

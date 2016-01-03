@@ -4,10 +4,11 @@ import requests
 
 import config, l0_repo
 
-def pull():
-  resp = requests.get(
-    'https://api.github.com/search/repositories?q=stars:>1&s=stars&order=desc',
-    auth=config.auth_)
+def pull(url=None, count=20):
+  if url is None:
+    url = 'https://api.github.com/search/repositories?q=stars:>1&s=stars&order=desc'
+  print 'requesting:', url
+  resp = requests.get(url, auth=config.auth_)
 
   results_dict = json.loads(resp.content)
   for repo_dict in results_dict['items']:
@@ -15,7 +16,9 @@ def pull():
 
   print 'rate-limit remaining:', resp.headers['x-ratelimit-remaining']
   next_link = re.search('<(.+?)>', resp.headers['link']).group(1)
-  print 'next_link:', next_link
+  if count > 0:
+    count -= 1
+    pull(next_link, count)
 
 def parse():
   with open('most_starred.json') as f:

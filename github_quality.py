@@ -3,7 +3,7 @@ import json, os, re, getpass, glob
 import requests, arrow
 
 from stuff import secrets
-import config, l0_repo
+import config, l0_repo, soft_train
 
 if not os.path.exists(config.cache_dir_path):
   os.mkdir(config.cache_dir_path)
@@ -19,7 +19,8 @@ def pull_most_starred():
   next_link = re.search('<(.+?)>', resp.headers['link']).group(1)
   print 'next_link:', next_link
 
-def pull_paths(paths):
+def get_mean_stars_per_issue():
+  print 'getting mean_stars_per_issue'
   resp = requests.get(
     'https://repo-quality.firebaseio.com/mean_stars_per_issue.json?auth=' +
     secrets.firebase_token)
@@ -28,7 +29,10 @@ def pull_paths(paths):
   except Exception as e:
     print 'error loading mean_stars_per_issue:', e
     mean_stars_per_issue = 10
+  return mean_stars_per_issue
 
+def pull_paths(paths):
+  mean_stars_per_issue = get_mean_stars_per_issue()
   repo_dicts = []
   min_score, max_score = None, None
   stars_per_issue_list = []
@@ -107,14 +111,15 @@ def pull_repo(path, mean_stars_per_issue, auth=None):
     repo_dict['stargazers_count'] / repo_dict['age'].days * 2)
 
   # (need to hardcode issue counts for projects which don't use github for issues)
-  if repo_dict['has_issues']:
-    issue_count = repo_dict['open_issues_count']
-  elif path in hardcoded_issue_counts:
-    issue_count = hardcoded_issue_counts[path]
-  else:
-    issue_count = repo_dict['stargazers_count'] / mean_stars_per_issue
-  repo_dict['issue_count'] = issue_count
-  repo_dict['score'] += repo_dict['stargazers_count'] / (issue_count or 1) * 20
+  if mean_stars_per_issue is not None:
+    if repo_dict['has_issues']:
+      issue_count = repo_dict['open_issues_count']
+    elif path in hardcoded_issue_counts:
+      issue_count = hardcoded_issue_counts[path]
+    else:
+      issue_count = repo_dict['stargazers_count'] / mean_stars_per_issue
+    repo_dict['issue_count'] = issue_count
+    repo_dict['score'] += repo_dict['stargazers_count'] / (issue_count or 1) * 20
   return repo_dict
 
 if __name__ == '__main__':
@@ -123,7 +128,8 @@ if __name__ == '__main__':
     with open(cache_file_path) as f:
       repo_dict = json.loads(f.read())
     paths.append(repo_dict['full_name'])
-  pull_paths(paths)
+  software_paths, _ = soft_train.classify(paths)
+  pull_paths(software_paths)
 
 
   # pull_paths([
