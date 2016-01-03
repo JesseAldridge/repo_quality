@@ -1,8 +1,21 @@
-<style>
-  * { font-family: Helvetica }
-  .main-form { margin: 30px }
-</style>
-
-<div>
-  Example: <a href='/twbs/bootstrap'>/twbs/bootstap</a></label>
-</div>
+{% extends 'wrapper.html' %}
+{% block content %}
+  <p>Examples:<p>
+  <ul>
+    <li>
+      <p>Individual repos:</p>
+      <ul>
+        <li><a href='/twbs/bootstrap'>/twbs/bootstap</a></li>
+        <li><a href='/lodash/lodash'>/lodash/lodash</a></li>
+        <li><a href='/JesseAldridge/github_quality'>/JesseAldridge/github_quality</a></li>
+      </ul>
+    </li>
+    <li>
+      <p>Lists:</p>
+      <ul>
+        <li><a href='/lists/web_frameworks'>/lists/web_frameworks</a></li>
+        <li><a href='/lists/python_unit_testing'>/lists/python_unit_testing</a></li>
+      </ul>
+    </li>
+  </ul>
+{% endblock %}

@@ -1,19 +1,17 @@
+{% extends 'wrapper.html' %}
+{% block content %}
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.1/angular.min.js"></script>
 
-<script src='/static/repo.js'></script>
-
 <link rel='stylesheet' href='/static/repo.css'>
-
-<script src='/static/get_rating.js'></script>
 
 <script>
   angular.module('myApp',[])
 
   .controller('MyController', function($scope) {
     $scope.repo_obj = JSON.parse('(((repo_json|safe)))');
-    $scope.get_rating = get_rating;
   })
 </script>
 
 <div ng-controller="MyController" ng-app="myApp" ng-include="'/templates/repo_templ.html'">
 </div>
+{% endblock %}

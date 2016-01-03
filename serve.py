@@ -23,7 +23,8 @@ def index():
 
 def filtered_repo(repo_path):
   repo_dict = github_quality.pull_repo(repo_path, mean_stars_per_issue, auth=config.auth_)
-  return {k: repo_dict[k] for k in ('full_name', 'score', 'has_issues')}
+  return {k: repo_dict[k] for k in (
+    'full_name', 'score', 'has_issues', 'rating_str', 'explanation')}
 
 
 @app.route('/templates/<path:path>')
@@ -74,7 +75,8 @@ def query_list(list_name):
       'golang/go'
     ]
   if paths:
-    list_json = json.dumps([filtered_repo(path) for path in paths])
+    list_json = json.dumps(
+      sorted([filtered_repo(path) for path in paths], key=lambda r: -r['score']))
     return flask.render_template('list.html', list_json=list_json)
   abort(404)
 

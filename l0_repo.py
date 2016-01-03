@@ -21,6 +21,8 @@ def validate_path(path):
     raise PathLengthException()
 
 def write_repo(repo_dict):
+  if isinstance(repo_dict, basestring):
+    repo_dict = json.loads(repo_dict)
   path = repo_dict['full_name']
   validate_path(path)
   cache_file_path = os.path.join(config.cache_dir_path, path.replace('/', '_')) + '.txt'

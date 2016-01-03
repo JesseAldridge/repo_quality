@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import json, os, re, getpass, glob
 
 import requests, arrow
@@ -120,6 +121,33 @@ def pull_repo(path, mean_stars_per_issue, auth=None):
       issue_count = repo_dict['stargazers_count'] / mean_stars_per_issue
     repo_dict['issue_count'] = issue_count
     repo_dict['score'] += repo_dict['stargazers_count'] / (issue_count or 1) * 20
+
+  score = repo_dict['score']
+  if score > 4000:
+    rating = 5
+    explanation = 'Outstanding!'
+  elif score > 1000:
+    rating = 4
+    explanation = 'Good'
+  elif score > 400:
+    rating = 3
+    explanation = 'Ok'
+  elif score > 200:
+    rating = 2
+    explanation = 'Bad'
+  elif score > 100:
+    rating = 1
+    explanation = 'Terrible'
+  else:
+    rating = 0
+    explanation = ''
+  rating_str = ''
+  for i in range(rating):
+    rating_str += u'⭐️' + u' '
+  if rating_str == '':
+    rating_str = u'💩'
+  repo_dict['rating_str'] = rating_str
+  repo_dict['explanation'] = explanation
   return repo_dict
 
 if __name__ == '__main__':
