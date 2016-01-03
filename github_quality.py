@@ -1,15 +1,13 @@
-import json, os, re, getpass
+import json, os, re, getpass, glob
 
 import requests, arrow
-from requests import auth
 
-import secrets, config
+from stuff import secrets
+import config, l0_repo
 
 if not os.path.exists(config.cache_dir_path):
   os.mkdir(config.cache_dir_path)
 
-class g:
-  mean_stars_per_issue = 10
 
 def pull_most_starred():
   resp = requests.get(
@@ -21,52 +19,47 @@ def pull_most_starred():
   next_link = re.search('<(.+?)>', resp.headers['link']).group(1)
   print 'next_link:', next_link
 
-def pull_all():
-  use_auth = True
-  auth_ = auth.HTTPBasicAuth('JesseAldridge', secrets.api_key) if use_auth else None
+def pull_paths(paths):
+  resp = requests.get(
+    'https://repo-quality.firebaseio.com/mean_stars_per_issue.json?auth=' +
+    secrets.firebase_token)
+  try:
+    mean_stars_per_issue = json.loads(resp.content)
+  except Exception as e:
+    print 'error loading mean_stars_per_issue:', e
+    mean_stars_per_issue = 10
+
   repo_dicts = []
   min_score, max_score = None, None
   stars_per_issue_list = []
-  for path in [
-    # libs that have worked well
-    'twbs/bootstrap', 'kennethreitz/requests', 'jasmine/jasmine', 'rails/rails',
-    'angular/angular.js', 'tax/python-requests-aws', 'django/django', 'mitsuhiko/flask',
-    'npm/npm', 'asweigart/pyperclip', 'JesseAldridge/github_quality', 'fabric/fabric',
+  for path in paths:
+    try:
+      repo_dict = pull_repo(path, mean_stars_per_issue, auth=config.auth_)
+      if min_score is None or repo_dict['score'] < min_score:
+        min_score = repo_dict['score']
+      if max_score is None or repo_dict['score'] > max_score:
+        max_score = repo_dict['score']
+      stars_per_issue = (
+        float(repo_dict['stargazers_count'] / repo_dict['issue_count'])
+        if repo_dict['issue_count'] != 0 else repo_dict['stargazers_count'])
+      stars_per_issue_list.append(stars_per_issue)
+      if not repo_dict:
+        print 'null repo:', path, repo_dict
+      repo_dicts.append(repo_dict)
+    except Exception as e:
+      print 'error reading:', path
+      print 'exception:', e
+      continue
 
-    # python unit testing libs
-    'nose-devs/nose', 'gabrielfalcao/lettuce', 'pytest-dev/pytest', 'nose-devs/nose2',
-    'docopt/docopt', 'gabrielfalcao/sure', 'rlisagor/freshen', 'behave/behave',
-
-    # libs I haven't tried much
-    'Microsoft/TypeScript', 'meteor/meteor', 'facebook/react', 'angular/angular',
-    'strongloop/express', 'dscape/nano', 'Level/levelup', 'felixge/node-mysql',
-    'mongodb/node-mongodb-native', 'brianc/node-postgres', 'NodeRedis/node_redis',
-    'mapbox/node-sqlite3', 'mafintosh/mongojs', 'tornadoweb/tornado', 'gevent/gevent',
-    'percolatestudio/meteor-migrations', 'Polymer/polymer', 'Automattic/mongoose',
-    'nodejs/node', 'sequelize/sequelize', 'Automattic/monk', 'balderdashy/waterline',
-    'balderdashy/sails', 'playframework/playframework', 'pyinvoke/invoke',
-    'msanders/snipmate.vim',
-
-    # libs that have given me trouble
-    'sindresorhus/atom-jshint', 'angular-ui-tree/angular-ui-tree',
-    'boto/boto', 'rupa/z', 'lsegal/atom-runner'
-    ]:
-    repo_dict = pull_repo(path, auth=auth_)
-    if min_score is None or repo_dict['score'] < min_score:
-      min_score = repo_dict['score']
-    if max_score is None or repo_dict['score'] > max_score:
-      max_score = repo_dict['score']
-    stars_per_issue_list.append(float(repo_dict['stargazers_count'] / repo_dict['issue_count']))
-    if not repo_dict:
-      print 'null repo:', path, repo_dict
-    repo_dicts.append(repo_dict)
-  g.mean_stars_per_issue = (
+  mean_stars_per_issue = (
     sum(stars_per_issue_list) / float(len(stars_per_issue_list))
-    if stars_per_issue_list else g.mean_stars_per_issue)
-
-  json_out = json.dumps({'min_score': min_score, 'max_score': max_score}, indent=2)
-  with open(os.path.join(config.cache_dir_path, 'min_max.json'), 'w') as f:
-    f.write(json_out)
+    if stars_per_issue_list else config.default_stars_per_issue)
+  requests.patch(
+    'https://repo-quality.firebaseio.com/.json?auth=' + secrets.firebase_token,
+    data=json.dumps({
+      'mean_stars_per_issue': mean_stars_per_issue,
+      'min_score': min_score, 'max_score': max_score
+    }))
 
   for repo_dict in sorted(repo_dicts, key=lambda d: -d['score']):
     print '        path:', repo_dict['path']
@@ -87,7 +80,6 @@ def pull_all():
     print repo_dict['path']
     print ' ', repo_dict['score']
 
-
 hardcoded_issue_counts = {
   'django/django': 1209,
   # (node-mongodb's jira page only lists 14 issues; but you have to make an account to create an
@@ -95,19 +87,15 @@ hardcoded_issue_counts = {
   'mongodb/node-mongodb-native': 140
 }
 
-def pull_repo(path, auth=None):
-  if not re.match('[A-Za-z0-9_/-]+', path):
-    return 'illegal char in path'
-  if len(path) > 100:
-    return 'path too long'
+
+def pull_repo(path, mean_stars_per_issue, auth=None):
+  l0_repo.validate_path(path)
   cache_file_path = os.path.join(config.cache_dir_path, path.replace('/', '_') + '.txt')
   if not os.path.exists(cache_file_path):
     print 'pulling info:', cache_file_path
     resp = requests.get('https://api.github.com/repos/' + path, auth=auth)
     print 'xrate-limit-remaining:', resp.headers['x-ratelimit-remaining']
-    if 'created_at' in resp.content:
-      with open(cache_file_path, 'w') as f:
-        f.write(json.dumps(json.loads(resp.content), indent=2))
+    l0_repo.write_repo(resp.content)
 
   with open(cache_file_path) as f:
     repo_dict = json.loads(f.read())
@@ -119,16 +107,46 @@ def pull_repo(path, auth=None):
     repo_dict['stargazers_count'] / repo_dict['age'].days * 2)
 
   # (need to hardcode issue counts for projects which don't use github for issues)
-  print 'mean_stars_per_issue:', g.mean_stars_per_issue
   if repo_dict['has_issues']:
     issue_count = repo_dict['open_issues_count']
   elif path in hardcoded_issue_counts:
     issue_count = hardcoded_issue_counts[path]
   else:
-    issue_count = repo_dict['stargazers_count'] / g.mean_stars_per_issue
+    issue_count = repo_dict['stargazers_count'] / mean_stars_per_issue
   repo_dict['issue_count'] = issue_count
   repo_dict['score'] += repo_dict['stargazers_count'] / (issue_count or 1) * 20
   return repo_dict
 
 if __name__ == '__main__':
-  pull_all()
+  paths = []
+  for cache_file_path in glob.glob(os.path.join(config.cache_dir_path, '*.txt')):
+    with open(cache_file_path) as f:
+      repo_dict = json.loads(f.read())
+    paths.append(repo_dict['full_name'])
+  pull_paths(paths)
+
+
+  # pull_paths([
+  #   # libs that have worked well
+  #   'twbs/bootstrap', 'kennethreitz/requests', 'jasmine/jasmine', 'rails/rails',
+  #   'angular/angular.js', 'tax/python-requests-aws', 'django/django', 'mitsuhiko/flask',
+  #   'npm/npm', 'asweigart/pyperclip', 'JesseAldridge/github_quality', 'fabric/fabric',
+
+  #   # python unit testing libs
+  #   'nose-devs/nose', 'gabrielfalcao/lettuce', 'pytest-dev/pytest', 'nose-devs/nose2',
+  #   'docopt/docopt', 'gabrielfalcao/sure', 'rlisagor/freshen', 'behave/behave',
+
+  #   # libs I haven't tried much
+  #   'Microsoft/TypeScript', 'meteor/meteor', 'facebook/react', 'angular/angular',
+  #   'strongloop/express', 'dscape/nano', 'Level/levelup', 'felixge/node-mysql',
+  #   'mongodb/node-mongodb-native', 'brianc/node-postgres', 'NodeRedis/node_redis',
+  #   'mapbox/node-sqlite3', 'mafintosh/mongojs', 'tornadoweb/tornado', 'gevent/gevent',
+  #   'percolatestudio/meteor-migrations', 'Polymer/polymer', 'Automattic/mongoose',
+  #   'nodejs/node', 'sequelize/sequelize', 'Automattic/monk', 'balderdashy/waterline',
+  #   'balderdashy/sails', 'playframework/playframework', 'pyinvoke/invoke',
+  #   'msanders/snipmate.vim',
+
+  #   # libs that have given me trouble
+  #   'sindresorhus/atom-jshint', 'angular-ui-tree/angular-ui-tree',
+  #   'boto/boto', 'rupa/z', 'lsegal/atom-runner'
+  # ])

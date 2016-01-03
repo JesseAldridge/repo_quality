@@ -12,13 +12,6 @@
 
   .controller('MyController', function($scope) {
     var repo_obj = $scope.repo_obj = JSON.parse( '(((repo_json|safe)))' );
-    var min_score = (((min_score)));
-    var max_score = (((max_score)));
-    $scope.get_percentile = function() {
-      if(max_score - min_score == 0)
-        return 100
-      return ((repo_obj.score - min_score) / (max_score - min_score) * 100)
-    }
 
     $scope.get_rating = function() {
       var score = repo_obj.score;

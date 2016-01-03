@@ -2,13 +2,16 @@ import json, re
 
 import requests
 
+import config, l0_repo
+
 def pull():
   resp = requests.get(
-    'https://api.github.com/search/repositories?q=stars:>1&s=stars&order=desc')
+    'https://api.github.com/search/repositories?q=stars:>1&s=stars&order=desc',
+    auth=config.auth_)
 
   results_dict = json.loads(resp.content)
-  for repo_dict in results_dict.items
-  print json.dumps(results_dict, indent=2)
+  for repo_dict in results_dict['items']:
+    l0_repo.write_repo(repo_dict)
 
   print 'rate-limit remaining:', resp.headers['x-ratelimit-remaining']
   next_link = re.search('<(.+?)>', resp.headers['link']).group(1)
@@ -21,4 +24,4 @@ def parse():
   print 'num:', len(most_starred['items'])
 
 if __name__ == '__main__':
-  parse()
+  pull()
