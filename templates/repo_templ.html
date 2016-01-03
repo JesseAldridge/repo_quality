@@ -1,0 +1,15 @@
+<div>
+  <span class='label'>Name:</span>
+  <a href="http://github.com/{{repo_obj.full_name}}">{{repo_obj.full_name}}</a>
+</div>
+<div>
+  <span class='label'>Raw score:</span>
+  <span>{{repo_obj.score.toFixed(0)}}</span>
+</div>
+<div>
+  <span class='label'>Rating:</span>
+  <span>{{get_rating(repo_obj)}}</span>
+</div>
+<div ng-hide='repo_obj.has_issues'>
+  <span>🐒 This project doesn't use GitHub for issues.  This makes the rating less reliable.</span>
+</div>

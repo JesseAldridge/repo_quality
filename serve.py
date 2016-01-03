@@ -21,31 +21,63 @@ def index():
   print 'rendered:', res
   return res
 
-class DateTimeEncoder(json.JSONEncoder):
-  def default(self, obj):
-    if isinstance(obj, datetime.datetime):
-      return obj.isoformat()
-    elif isinstance(obj, datetime.date):
-      return obj.isoformat()
-    elif isinstance(obj, datetime.timedelta):
-      return (datetime.datetime.min + obj).time().isoformat()
-    else:
-      return super(DateTimeEncoder, self).default(obj)
+def filtered_repo(repo_path):
+  repo_dict = github_quality.pull_repo(repo_path, mean_stars_per_issue, auth=config.auth_)
+  return {k: repo_dict[k] for k in ('full_name', 'score', 'has_issues')}
+
+
+@app.route('/templates/<path:path>')
+def send_js(path):
+    return flask.send_from_directory('templates', path)
 
 @app.route('/<username>/<repo_name>')
 def query_repo(username, repo_name):
-  print 'request.args:', request.args
-  repo = '/'.join((username, repo_name))
-  repo_dict = github_quality.pull_repo(repo, mean_stars_per_issue, auth=config.auth_)
+  repo_dict = filtered_repo('/'.join((username, repo_name)))
+  repo_json = json.dumps(repo_dict)
 
-  with open(os.path.join(config.cache_dir_path, 'min_max.json')) as f:
-    min_max = json.loads(f.read())
-  # json_out = DateTimeEncoder().encode(repo_dict)
-  filtered_dict = {k: repo_dict[k] for k in ('full_name', 'score', 'has_issues')}
-  repo_json = json.dumps(filtered_dict)
-  return flask.render_template(
-    'main.html', repo_json=repo_json,
-    min_score=min_max['min_score'], max_score=min_max['max_score'])
+  return flask.render_template('repo.html', repo_json=repo_json)
+
+@app.route('/lists/<list_name>')
+def query_list(list_name):
+  paths = None
+  if list_name == 'python_unit_testing':
+    paths = [
+      'rlisagor/freshen',
+      'gabrielfalcao/sure',
+      'gabrielfalcao/lettuce',
+      'behave/behave',
+      'nose-devs/nose2',
+      'nose-devs/nose',
+      'pytest-dev/pytest'
+    ]
+  elif list_name == 'web_frameworks':
+    paths = [
+      'meteor/meteor',
+      'mitsuhiko/flask',
+      'rails/rails',
+      'django/django',
+      'phoenixframework/phoenix',
+      'balderdashy/sails',
+      'strongloop/express',
+      'nodejs/node'
+    ]
+  elif list_name == 'front_end_frameworks':
+    paths = [
+      'angular/angular',
+      'facebook/react',
+      'angular/angular.js',
+      'jashkenas/backbone'
+    ]
+  elif list_name == 'programming_languages':
+    paths = [
+      'elixir-lang/elixir',
+      'golang/go'
+    ]
+  if paths:
+    list_json = json.dumps([filtered_repo(path) for path in paths])
+    return flask.render_template('list.html', list_json=list_json)
+  abort(404)
+
 
 if __name__ == '__main__':
   # Bind to PORT if defined, otherwise default to 5000.

@@ -1,0 +1,11 @@
+.repo {
+  margin: 10px;
+  border: solid 2px;
+  display: table;
+  padding: 10px;
+}
+
+.label {
+  width: 80px;
+  display: inline-block;
+}
