@@ -4,7 +4,7 @@ import json, os, re, getpass, glob
 import requests, arrow
 
 from stuff import secrets
-import config, l0_repo, soft_train
+import config, l0_repo, soft_train, score
 
 if not os.path.exists(config.cache_dir_path):
   os.mkdir(config.cache_dir_path)
@@ -85,14 +85,6 @@ def pull_paths(paths):
     print repo_dict['path']
     print ' ', repo_dict['score']
 
-hardcoded_issue_counts = {
-  'django/django': 1209,
-  # (node-mongodb's jira page only lists 14 issues; but you have to make an account to create an
-  #  issue, so I'm assuming that if they used GitHub issues they would have 10x more.)
-  'mongodb/node-mongodb-native': 140
-}
-
-
 def pull_repo(path, mean_stars_per_issue, auth=None):
   l0_repo.validate_path(path)
   cache_file_path = os.path.join(config.cache_dir_path, path.replace('/', '_') + '.txt')
@@ -107,20 +99,8 @@ def pull_repo(path, mean_stars_per_issue, auth=None):
 
   repo_dict['path'] = path
   repo_dict['age'] = arrow.now() - arrow.get(repo_dict['created_at'])
-  repo_dict['score'] = (
-    repo_dict['stargazers_count'] * .01 +
-    repo_dict['stargazers_count'] / repo_dict['age'].days * 2)
 
-  # (need to hardcode issue counts for projects which don't use github for issues)
-  if mean_stars_per_issue is not None:
-    if repo_dict['has_issues']:
-      issue_count = repo_dict['open_issues_count']
-    elif path in hardcoded_issue_counts:
-      issue_count = hardcoded_issue_counts[path]
-    else:
-      issue_count = repo_dict['stargazers_count'] / mean_stars_per_issue
-    repo_dict['issue_count'] = issue_count
-    repo_dict['score'] += repo_dict['stargazers_count'] / (issue_count or 1) * 20
+  score.calc_score(repo_dict, mean_stars_per_issue)
 
   score = repo_dict['score']
   if score > 4000:
