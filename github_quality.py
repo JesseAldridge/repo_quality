@@ -102,20 +102,20 @@ def pull_repo(path, mean_stars_per_issue, auth=None):
 
   score.calc_score(repo_dict, mean_stars_per_issue)
 
-  score = repo_dict['score']
-  if score > 4000:
+  score_ = repo_dict['score']
+  if score_ > 4000:
     rating = 5
     explanation = 'Outstanding!'
-  elif score > 1000:
+  elif score_ > 1000:
     rating = 4
     explanation = 'Good'
-  elif score > 400:
+  elif score_ > 400:
     rating = 3
     explanation = 'Ok'
-  elif score > 200:
+  elif score_ > 200:
     rating = 2
     explanation = 'Bad'
-  elif score > 100:
+  elif score_ > 100:
     rating = 1
     explanation = 'Terrible'
   else:
