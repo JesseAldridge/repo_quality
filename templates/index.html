@@ -13,9 +13,15 @@
     <li>
       <p>Lists:</p>
       <ul>
-        <li><a href='/lists/web_frameworks'>/lists/web_frameworks</a></li>
-        <li><a href='/lists/python_unit_testing'>/lists/python_unit_testing</a></li>
-      </ul>
+      {% for list_name, list in repo_lists.iteritems() %}
+        <li><a href='/lists/(((list_name)))'>(((list_name)))</a>
+          <ul>
+          {% for path in list %}
+            <li><a href='(((path)))'>(((path)))</a></li>
+          {% endfor %}
+          </ul>
+        </li>
+      {% endfor %}
     </li>
   </ul>
 {% endblock %}

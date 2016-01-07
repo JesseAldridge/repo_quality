@@ -14,10 +14,51 @@ app.comment_end_string='#))'
 
 mean_stars_per_issue = github_quality.get_mean_stars_per_issue()
 
+repo_lists = {
+  'python_unit_testing': [
+    'rlisagor/freshen',
+    'gabrielfalcao/sure',
+    'gabrielfalcao/lettuce',
+    'behave/behave',
+    'nose-devs/nose2',
+    'nose-devs/nose',
+    'pytest-dev/pytest'
+  ],
+  'web_frameworks': [
+    'meteor/meteor',
+    'mitsuhiko/flask',
+    'rails/rails',
+    'django/django',
+    'phoenixframework/phoenix',
+    'balderdashy/sails',
+    'strongloop/express',
+    'nodejs/node'
+  ],
+  'front_end_frameworks': [
+    'angular/angular',
+    'facebook/react',
+    'angular/angular.js',
+    'jashkenas/backbone'
+  ],
+  'programming_languages': [
+    'elixir-lang/elixir',
+    'golang/go',
+    'timburks/nu',
+  ],
+  'git_guis': [
+    'pieter/gitx',
+    'rowanj/gitx',
+    'brotherbard/gitx',
+    'laullon/gitx',
+    'beheadedmyway/gity'
+  ]
+}
+
+
 @app.route('/')
 def index():
-  print 'hello'
-  res = flask.render_template('index.html')
+  print 'lists:', repo_lists
+  res = flask.render_template('index.html', repo_lists=repo_lists)
   print 'rendered:', res
   return res
 
@@ -40,40 +81,7 @@ def query_repo(username, repo_name):
 
 @app.route('/lists/<list_name>')
 def query_list(list_name):
-  paths = None
-  if list_name == 'python_unit_testing':
-    paths = [
-      'rlisagor/freshen',
-      'gabrielfalcao/sure',
-      'gabrielfalcao/lettuce',
-      'behave/behave',
-      'nose-devs/nose2',
-      'nose-devs/nose',
-      'pytest-dev/pytest'
-    ]
-  elif list_name == 'web_frameworks':
-    paths = [
-      'meteor/meteor',
-      'mitsuhiko/flask',
-      'rails/rails',
-      'django/django',
-      'phoenixframework/phoenix',
-      'balderdashy/sails',
-      'strongloop/express',
-      'nodejs/node'
-    ]
-  elif list_name == 'front_end_frameworks':
-    paths = [
-      'angular/angular',
-      'facebook/react',
-      'angular/angular.js',
-      'jashkenas/backbone'
-    ]
-  elif list_name == 'programming_languages':
-    paths = [
-      'elixir-lang/elixir',
-      'golang/go'
-    ]
+  paths = repo_lists[list_name] if list_name in repo_lists else None
   if paths:
     list_json = json.dumps(
       sorted([filtered_repo(path) for path in paths], key=lambda r: -r['score']))
