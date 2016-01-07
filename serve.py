@@ -50,7 +50,8 @@ repo_lists = {
     'rowanj/gitx',
     'brotherbard/gitx',
     'laullon/gitx',
-    'beheadedmyway/gity'
+    'beheadedmyway/gity',
+    'andreberg/gitx'
   ]
 }
 
