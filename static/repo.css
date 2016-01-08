@@ -7,9 +7,12 @@
   padding: 10px;
 }
 
+
 .repo-label {
-  width: 138px;
+  width: 130px;
   display: inline-block;
+  text-align: right;
+  margin-right: 13px;
 }
 
 .explanation {
