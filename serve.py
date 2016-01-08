@@ -63,7 +63,10 @@ def index():
 
 
 def get_repo(repo_path):
-  return github_quality.pull_repo(repo_path, mean_stars_per_issue, auth=config.auth_)
+  repo_dict = github_quality.pull_repo(repo_path, mean_stars_per_issue, auth=config.auth_)
+  return {k: repo_dict[k] for k in (
+    'full_name', 'score', 'has_issues', 'rating_str', 'explanation', 'open_issues',
+    'stargazers_count', 'age')}
 
 
 class DateTimeEncoder(json.JSONEncoder):

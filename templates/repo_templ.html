@@ -4,12 +4,12 @@
     <a href="http://github.com/{{repo_obj.full_name}}">{{repo_obj.full_name}}</a>
   </div>
   <div>
-    <span class='repo-label'>Raw score:</span>
-    <span>{{repo_obj.score.toFixed(0)}}</span>
-  </div>
-  <div>
     <span class='repo-label'>Rating:</span>
     <span>{{repo_obj.rating_str}}</span><span class='explanation'>{{repo_obj.explanation}}</span>
+  </div>
+  <div>
+    <span class='repo-label'>Raw score:</span>
+    <span>{{repo_obj.score.toFixed(0)}}</span>
   </div>
   <div ng-hide='repo_obj.has_issues'>
     <span>🐒 This project doesn't use GitHub for issues.  This makes the rating less reliable.</span>
