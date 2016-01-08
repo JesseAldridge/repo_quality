@@ -59,33 +59,41 @@ repo_lists = {
 @app.route('/')
 def index():
   print 'lists:', repo_lists
-  res = flask.render_template('index.html', repo_lists=repo_lists)
-  print 'rendered:', res
-  return res
+  return flask.render_template('index.html', repo_lists=repo_lists)
 
-def filtered_repo(repo_path):
-  repo_dict = github_quality.pull_repo(repo_path, mean_stars_per_issue, auth=config.auth_)
-  return {k: repo_dict[k] for k in (
-    'full_name', 'score', 'has_issues', 'rating_str', 'explanation')}
+
+def get_repo(repo_path):
+  return github_quality.pull_repo(repo_path, mean_stars_per_issue, auth=config.auth_)
+
+
+class DateTimeEncoder(json.JSONEncoder):
+  def default(self, obj):
+    if isinstance(obj, datetime.datetime):
+      return obj.isoformat()
+    elif isinstance(obj, datetime.date):
+      return obj.isoformat()
+    elif isinstance(obj, datetime.timedelta):
+      return obj.days
+    else:
+      return super(DateTimeEncoder, self).default(obj)
 
 
 @app.route('/templates/<path:path>')
 def send_js(path):
-    return flask.send_from_directory('templates', path)
+  return flask.send_from_directory('templates', path)
 
 @app.route('/<username>/<repo_name>')
 def query_repo(username, repo_name):
-  repo_dict = filtered_repo('/'.join((username, repo_name)))
-  repo_json = json.dumps(repo_dict)
-
+  repo_dict = get_repo('/'.join((username, repo_name)))
+  repo_json = DateTimeEncoder().encode(repo_dict)
   return flask.render_template('repo.html', repo_json=repo_json)
 
 @app.route('/lists/<list_name>')
 def query_list(list_name):
   paths = repo_lists[list_name] if list_name in repo_lists else None
   if paths:
-    list_json = json.dumps(
-      sorted([filtered_repo(path) for path in paths], key=lambda r: -r['score']))
+    list_json = DateTimeEncoder().encode(
+      sorted([get_repo(path) for path in paths], key=lambda r: -r['score']))
     return flask.render_template('list.html', list_json=list_json)
   abort(404)
 
