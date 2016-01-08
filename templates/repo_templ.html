@@ -11,9 +11,6 @@
     <span class='repo-label'>Score:</span>
     <span>{{repo_obj.score.toFixed(0)}}</span>
   </div>
-  <div ng-hide='repo_obj.has_issues'>
-    <span>🐒 This project doesn't use GitHub for issues.  This makes the rating less reliable.</span>
-  </div>
   <div>
     <span class='repo-label'>Stars:</span>
     <span>{{repo_obj.stargazers_count}}</span>
@@ -30,8 +27,11 @@
     <span class='repo-label'>Stars / Age:</span>
     <span>{{(repo_obj.stargazers_count / (repo_obj.age || 1)).toFixed(0)}}</span>
   </div>
-  <div ng-if="repo_obj.open_issues">
+  <div ng-if="repo_obj.has_issues">
     <span class='repo-label'>Open issues:</span>
     <span>{{repo_obj.open_issues}}</span>
+  </div>
+  <div ng-hide='repo_obj.has_issues'>
+    <span>🐒 This project doesn't use GitHub for issues.  This makes the rating less reliable.</span>
   </div>
 </div>
