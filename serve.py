@@ -65,7 +65,6 @@ repo_lists = {
     'tobiasahlin/SpinKit',
     'Alamofire/Alamofire',
     'jwagner/smartcrop.js',
-    'sahat/hackathon-starter',
     'roots/sage',
     'SnapKit/Masonry',
     'phanan/htaccess',
@@ -158,6 +157,7 @@ repo_lists = {
     'limetext/lime',
     'koajs/koa',
     'davatron5000/FitText.js',
+    'isagalaev/highlight.js'
   ]
 }
 
