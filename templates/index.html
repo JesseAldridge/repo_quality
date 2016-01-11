@@ -14,13 +14,7 @@
       <p>Lists:</p>
       <ul>
       {% for list_name, list in repo_lists.iteritems() %}
-        <li><a href='/lists/(((list_name)))'>(((list_name)))</a>
-          <ul>
-          {% for path in list %}
-            <li><a href='(((path)))'>(((path)))</a></li>
-          {% endfor %}
-          </ul>
-        </li>
+        <li><a href='/lists/(((list_name)))'>(((list_name)))</a></li>
       {% endfor %}
     </li>
   </ul>

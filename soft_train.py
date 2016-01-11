@@ -7,7 +7,8 @@ def classify(paths):
   non_software_matches = []
   software_matches = []
   for path in paths:
-    description = github_quality.pull_repo(path, None)['description']
+    repo_info = github_quality.pull_repo(path, None)
+    description, has_issues = repo_info['description'], repo_info['has_issues']
     non_ascii = False
     if description:
       ascii_count = 0
@@ -16,7 +17,7 @@ def classify(paths):
           ascii_count += 1
       if ascii_count < len(description) * .95:
         non_ascii = True
-    if((description and re.search(r'\blist\b', description)) or non_ascii):
+    if(not has_issues or (description and re.search(r'\blist\b', description)) or non_ascii):
       non_software_matches.append(path)
     else:
       software_matches.append(path)
