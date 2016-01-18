@@ -21,10 +21,10 @@ def validate_path(path):
   if len(path) > 100:
     raise PathLengthException()
 
-def write_repo(repo_dict):
+def write_repo(repo_dict, repo_path=None):
   if isinstance(repo_dict, basestring):
     repo_dict = json.loads(repo_dict)
-  path = repo_dict['full_name']
+  path = repo_path if repo_path else repo_dict['full_name']
   validate_path(path)
   cache_file_path = os.path.join(config.cache_dir_path, path.replace('/', '_')) + '.txt'
   if 'created_at' not in repo_dict:
@@ -73,18 +73,10 @@ def score_to_rating(score):
 if __name__ == '__main__':
   def test():
     main_resp = requests.get('https://api.github.com/repos/twbs/bootstrap')
-    closed_resp = requests.get(
-      'https://api.github.com/search/issues?q=repo:twbs/bootstrap+is:issue+is:closed')
-    cache_file_path = write_repo(main_resp.content, closed_resp.content)
+    cache_file_path = write_repo(main_resp.content)
     mod_time = os.path.getmtime(cache_file_path)
     assert time.time() - mod_time < 1, time.time() - mod_time
     mean_stars_per_issue = get_mean_stars_per_issue()
     rate_repo(calc_score.fake_repo_dict, mean_stars_per_issue)
     assert calc_score.fake_repo_dict['explanation']
-
-    cache_file_path = os.path.join(config.cache_dir_path, 'twbs_bootstrap.txt')
-    with open(cache_file_path) as f:
-      content_str = f.read()
-    repo_dict = json.loads(content_str)
-    assert repo_dict['closed_issues']
   test()

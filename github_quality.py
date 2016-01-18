@@ -81,7 +81,7 @@ def pull_repo(repo_path, mean_stars_per_issue, auth=None):
     main_resp = requests.get('https://api.github.com/repos/' + repo_path, auth=auth)
     if main_resp.status_code == 200:
       print 'main xrate-limit-remaining:', main_resp.headers['x-ratelimit-remaining']
-      l0_repo.write_repo(main_resp.content)
+      l0_repo.write_repo(main_resp.content, repo_path)
 
   with open(cache_file_path) as f:
     repo_dict = json.loads(f.read())
