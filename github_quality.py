@@ -1,39 +1,18 @@
-# -*- coding: utf-8 -*-
-import json, os, re, getpass, glob
+import json, os, re, getpass, glob, time
 
 import requests, arrow
 
 from stuff import secrets
-import config, l0_repo, soft_train, score
+import config, l0_repo, soft_train
 
 if not os.path.exists(config.cache_dir_path):
   os.mkdir(config.cache_dir_path)
 
-
-def pull_most_starred():
-  resp = requests.get(
-    'https://api.github.com/search/repositories?q=stars:>1&s=stars&order=desc')
-
-  print json.dumps(json.loads(resp.content), indent=2)
-
-  print 'rate-limit remaining:', resp.headers['x-ratelimit-remaining']
-  next_link = re.search('<(.+?)>', resp.headers['link']).group(1)
-  print 'next_link:', next_link
-
-def get_mean_stars_per_issue():
-  print 'getting mean_stars_per_issue'
-  resp = requests.get(
-    'https://repo-quality.firebaseio.com/mean_stars_per_issue.json?auth=' +
-    secrets.firebase_token)
-  try:
-    mean_stars_per_issue = json.loads(resp.content)
-  except Exception as e:
-    print 'error loading mean_stars_per_issue:', e
-    mean_stars_per_issue = 10
-  return mean_stars_per_issue
+class g:
+  search_reset_time = None
 
 def pull_paths(paths):
-  mean_stars_per_issue = get_mean_stars_per_issue()
+  mean_stars_per_issue = l0_repo.get_mean_stars_per_issue()
   repo_dicts = []
   min_score, max_score = None, None
   stars_per_issue_list = []
@@ -85,49 +64,43 @@ def pull_paths(paths):
     print repo_dict['path']
     print ' ', repo_dict['score']
 
-def pull_repo(path, mean_stars_per_issue, auth=None):
-  l0_repo.validate_path(path)
-  cache_file_path = os.path.join(config.cache_dir_path, path.replace('/', '_') + '.txt')
+
+class SearchAPI:
+  def __init__(self):
+    self.rate_limit, self.reset_time = None, None
+
+  def can_use(self):
+    return self.rate_limit is None or self.rate_limit > 0 or time.time() > self.reset_time
+
+search_api = SearchAPI()
+def pull_repo(repo_path, mean_stars_per_issue, auth=None):
+  l0_repo.validate_path(repo_path)
+  cache_file_path = os.path.join(config.cache_dir_path, repo_path.replace('/', '_') + '.txt')
   if not os.path.exists(cache_file_path):
     print 'pulling info:', cache_file_path
-    resp = requests.get('https://api.github.com/repos/' + path, auth=auth)
-    print 'xrate-limit-remaining:', resp.headers['x-ratelimit-remaining']
-    l0_repo.write_repo(resp.content)
+    main_resp = requests.get('https://api.github.com/repos/' + repo_path, auth=auth)
+    if main_resp.status_code == 200:
+      print 'main xrate-limit-remaining:', main_resp.headers['x-ratelimit-remaining']
+      l0_repo.write_repo(main_resp.content)
 
   with open(cache_file_path) as f:
     repo_dict = json.loads(f.read())
 
-  repo_dict['path'] = path
+  if not 'closed_issues' in repo_dict and search_api.can_use():
+    closed_resp = requests.get(
+      'https://api.github.com/search/issues?q=repo:{}+is:issue+is:closed'.format(
+        repo_path), auth=auth)
+    search_api.rate_limit = int(closed_resp.headers['x-ratelimit-remaining'])
+    search_api.reset_time = int(closed_resp.headers['x-ratelimit-reset'])
+    print 'closed xrate-limit-remaining:', search_api.rate_limit
+    if closed_resp.status_code == 200:
+      repo_dict['closed_issues'] = json.loads(closed_resp.content)['total_count']
+      l0_repo.write_repo(repo_dict)
+
+  repo_dict['path'] = repo_path
   repo_dict['age'] = arrow.now() - arrow.get(repo_dict['created_at'])
 
-  score.calc_score(repo_dict, mean_stars_per_issue)
-
-  score_ = repo_dict['score']
-  if score_ > 4000:
-    rating = 5
-    explanation = 'Outstanding!'
-  elif score_ > 1000:
-    rating = 4
-    explanation = 'Good'
-  elif score_ > 400:
-    rating = 3
-    explanation = 'Ok'
-  elif score_ > 200:
-    rating = 2
-    explanation = 'Bad'
-  elif score_ > 100:
-    rating = 1
-    explanation = 'Terrible'
-  else:
-    rating = 0
-    explanation = ''
-  rating_str = ''
-  for i in range(rating):
-    rating_str += u'⭐️' + u' '
-  if rating_str == '':
-    rating_str = u'💩'
-  repo_dict['rating_str'] = rating_str
-  repo_dict['explanation'] = explanation
+  l0_repo.rate_repo(repo_dict, mean_stars_per_issue)
   return repo_dict
 
 if __name__ == '__main__':
