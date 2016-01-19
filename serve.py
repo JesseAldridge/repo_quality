@@ -46,7 +46,8 @@ repo_lists = {
         'angular/angular.js',
         'jashkenas/backbone',
         'vuejs/vue',
-        'jquery/jquery'
+        'jquery/jquery',
+        'emberjs/ember.js'
     ],
     'programming_languages': [
         'elixir-lang/elixir',
