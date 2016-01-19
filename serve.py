@@ -38,7 +38,8 @@ repo_lists = {
         'strongloop/express',
         'nodejs/node',
         'senchalabs/connect',
-        'hapijs/hapi'
+        'hapijs/hapi',
+        'laravel/laravel'
     ],
     'front_end_frameworks': [
         'angular/angular',
