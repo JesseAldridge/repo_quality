@@ -59,7 +59,8 @@ repo_lists = {
         'jashkenas/backbone',
         'vuejs/vue',
         'jquery/jquery',
-        'emberjs/ember.js'
+        'emberjs/ember.js',
+        'lhorie/mithril'
     ],
     'programming_languages': [
         'elixir-lang/elixir',
