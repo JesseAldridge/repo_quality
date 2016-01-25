@@ -19,6 +19,17 @@ app.comment_end_string = '#))'
 mean_stars_per_issue = l0_repo.get_mean_stars_per_issue()
 
 repo_lists = {
+    'node_sql': [
+        'dresende/node-orm2',
+        'tgriesser/bookshelf',
+        'felixge/node-mysql',
+        '1602/jugglingdb',
+        'brianc/node-postgres',
+        'tgriesser/knex',
+        'balderdashy/waterline',
+        'sequelize/sequelize',
+        'devinivy/dogwater'
+    ],
     'python_unit_testing': [
         'rlisagor/freshen',
         'gabrielfalcao/sure',
