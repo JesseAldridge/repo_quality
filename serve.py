@@ -4,6 +4,7 @@ import datetime
 
 import flask
 from flask import request
+from werkzeug import exceptions
 
 import github_quality
 import config
@@ -19,6 +20,63 @@ app.comment_end_string = '#))'
 mean_stars_per_issue = l0_repo.get_mean_stars_per_issue()
 
 repo_lists = {
+    'connect_middleware': set([
+        'expressjs/body-parser',
+        'Raynos/body',
+        'cojs/co-body',
+        'stream-utils/raw-body',
+        'expressjs/compression',
+        'expressjs/timeout',
+        'expressjs/cookie-parser',
+        'expressjs/cookie-session',
+        'expressjs/csurf',
+        'expressjs/errorhandler',
+        'expressjs/session',
+        'expressjs/method-override',
+        'expressjs/morgan',
+        'expressjs/response-time',
+        'expressjs/serve-favicon',
+        'expressjs/serve-index',
+        'expressjs/serve-static',
+        'expressjs/vhost',
+        'pillarjs/cookies',
+        'expressjs/keygrip',
+        'stream-utils/raw-body',
+        'andrewrk/connect-multiparty',
+        'mscdex/connect-busboy',
+        'ljharb/qs',
+        'isaacs/st',
+        'andrewrk/connect-static',
+        "aaronblohowiak/routes.js",
+        "Raynos/routes-router",
+        "saambarati/mapleTree",
+        "Raynos/http-methods",
+        "isaacbw/node-egress",
+        "stream-utils/raw-body",
+        "jed/cookies",
+        "jed/keygrip",
+        "Raynos/send-data",
+        "Raynos/redirecter",
+        "expressjs/serve-favicon",
+        "ghostsnstuff/serve-file-download",
+        "isaacs/st",
+        "Raynos/serve-browserify",
+        "Raynos/npm-less",
+        "mikeal/filed",
+        "mikeal/request",
+        "dominictarr/hyperscript",
+        "visionmedia/consolidate.js/",
+        "raynos/validate-form",
+        "spumko/joi",
+        "mafintosh/is-my-json-valid",
+        "isaacs/redsess",
+        "rvagg/level-session",
+        "rvagg/node-generic-session",
+        "dominictarr/config-chain",
+        "Raynos/static-config",
+        "Raynos/error",
+        "rvagg/bole",
+    ]),
     'node_sql': [
         'dresende/node-orm2',
         'tgriesser/bookshelf',
@@ -354,8 +412,13 @@ def query_repo(username, repo_name):
 def query_list(list_name):
     paths = repo_lists[list_name] if list_name in repo_lists else None
     if paths:
-        list_json = DateTimeEncoder().encode(
-            sorted([get_repo(path) for path in paths], key=lambda r: -r['score']))
+        repos = []
+        for path in paths:
+            try:
+                repos.append(get_repo(path))
+            except exceptions.NotFound:
+                pass
+        list_json = DateTimeEncoder().encode(sorted(repos, key=lambda r: -r['score']))
         return flask.render_template('list.html', list_json=list_json)
     abort(404)
 

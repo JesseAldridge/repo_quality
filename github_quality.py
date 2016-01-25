@@ -1,6 +1,7 @@
 import json, os, re, getpass, glob, time
 
-import requests, arrow
+import requests, arrow, flask
+from werkzeug import exceptions
 
 from stuff import secrets
 import config, l0_repo, soft_train
@@ -82,6 +83,8 @@ def pull_repo(repo_path, mean_stars_per_issue, auth=None):
     if main_resp.status_code == 200:
       print 'main xrate-limit-remaining:', main_resp.headers['x-ratelimit-remaining']
       l0_repo.write_repo(main_resp.content, repo_path)
+    else:
+      raise exceptions.NotFound()
 
   with open(cache_file_path) as f:
     repo_dict = json.loads(f.read())
