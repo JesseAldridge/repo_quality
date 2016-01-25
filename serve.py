@@ -60,7 +60,7 @@ repo_lists = {
         'vuejs/vue',
         'jquery/jquery',
         'emberjs/ember.js',
-        'lhorie/mithril'
+        'lhorie/mithril.js'
     ],
     'programming_languages': [
         'elixir-lang/elixir',
