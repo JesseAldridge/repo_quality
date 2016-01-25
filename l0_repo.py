@@ -59,7 +59,7 @@ def rate_repo(repo_dict, mean_stars_per_issue):
 
 def score_to_rating(score):
   if score > 4000:
-    return 5, 'GOD TIER'
+    return 5, 'LEGENDARY'
   elif score > 1000:
     return 4, 'Excellent'
   elif score > 400:
