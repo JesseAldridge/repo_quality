@@ -128,7 +128,8 @@ repo_lists = {
         'apple/swift',
         'ruby/ruby',
         'php/php-src',
-        'dart-lang/sdk'
+        'dart-lang/sdk',
+        'JetBrains/kotlin'
     ],
     'git_guis': [
         'pieter/gitx',
@@ -137,6 +138,12 @@ repo_lists = {
         'laullon/gitx',
         'beheadedmyway/gity',
         'andreberg/gitx'
+    ],
+    'databases': [
+        'google/leveldb',
+        'mongodb/mongo',
+        'neo4j/neo4j',
+        'antirez/redis'
     ],
     'hundred_best': [
         'lodash/lodash',
