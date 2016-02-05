@@ -409,6 +409,7 @@ def send_js(path):
 
 
 @app.route('/<username>/<repo_name>')
+@app.route('/<username>/<repo_name>/')
 def query_repo(username, repo_name):
     repo_dict = get_repo('/'.join((username, repo_name)))
     repo_json = DateTimeEncoder().encode(repo_dict)
