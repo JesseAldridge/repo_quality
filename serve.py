@@ -180,7 +180,10 @@ repo_lists = {
         'google/leveldb',
         'mongodb/mongo',
         'neo4j/neo4j',
-        'antirez/redis'
+        'antirez/redis',
+        'rethinkdb/rethinkdb',
+        'pouchdb/pouchdb',
+        'thinkaurelius/titan'
     ],
     'hundred_best': [
         'lodash/lodash',
