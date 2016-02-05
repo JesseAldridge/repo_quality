@@ -77,6 +77,7 @@ if __name__ == '__main__':
     mod_time = os.path.getmtime(cache_file_path)
     assert time.time() - mod_time < 1, time.time() - mod_time
     mean_stars_per_issue = get_mean_stars_per_issue()
+    print 'mean_stars_per_issue:', mean_stars_per_issue
     rate_repo(calc_score.fake_repo_dict, mean_stars_per_issue)
     assert calc_score.fake_repo_dict['explanation']
   test()
