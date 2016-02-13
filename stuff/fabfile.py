@@ -8,7 +8,8 @@ proj_path = os.path.dirname(os.path.dirname(__file__))
 proj_name = os.path.basename(proj_path)
 
 env.user = 'ubuntu'
-env.hosts = ['54.172.109.248']
+env.hosts = ['repo_quality']
+env.use_ssh_config = True
 
 
 @api.task

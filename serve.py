@@ -126,12 +126,22 @@ repo_lists = {
     'front_end_frameworks': [
         'angular/angular',
         'facebook/react',
+        'facebook/flux',
         'angular/angular.js',
         'jashkenas/backbone',
         'vuejs/vue',
         'jquery/jquery',
         'emberjs/ember.js',
-        'lhorie/mithril.js'
+        'lhorie/mithril.js',
+        'Polymer/polymer',
+        'riot/riot'
+    ],
+    'vue_state': [
+        'visionmedia/superagent',
+        'vuejs/vuex',
+        'reactjs/redux',
+        'egoist/revue',
+        'vuejs/vue-resource'
     ],
     'programming_languages': [
         'Microsoft/dotnet',
@@ -183,7 +193,19 @@ repo_lists = {
         'antirez/redis',
         'rethinkdb/rethinkdb',
         'pouchdb/pouchdb',
-        'thinkaurelius/titan'
+        'thinkaurelius/titan',
+    ],
+    'python_rpc': [
+        'shibukawa/curl_as_dsl',
+        'irmen/Pyro4',
+        'tomerfiliba/rpyc',
+        'arskom/spyne',
+        'python-symmetric-jsonrpc',
+        'dwb/jsonrpc2-zeromq-python',
+        'kiorky/SOAPpy',
+        'wamp-proto/wamp-proto',
+        'geoffwatts/zmqrpc',
+        '0rpc/zerorpc-python',
     ],
     'hundred_best': [
         'lodash/lodash',
