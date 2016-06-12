@@ -30,10 +30,17 @@ def write_repo(repo_dict, mean_stars_per_issue, repo_path=None):
   if 'created_at' not in repo_dict:
     raise BadRepoException()
 
+  if os.path.exists(cache_file_path):
+    with open(cache_file_path) as f:
+      old_text = f.read()
+    old_repo_dict = json.loads(old_text)
+    repo_dict['timestamp_to_score'] = old_repo_dict['timestamp_to_score']
+
   repo_dict['path'] = path
   repo_dict['age'] = (arrow.now() - arrow.get(repo_dict['created_at']))
   rate_repo(repo_dict, mean_stars_per_issue)
   now = arrow.utcnow()
+
   repo_dict.setdefault('timestamp_to_score', {})
   repo_dict['timestamp_to_score'][now.isoformat()] = repo_dict['score']
   repo_dict['age'] = repo_dict['age'].total_seconds()
@@ -83,10 +90,10 @@ def score_to_rating(score):
 if __name__ == '__main__':
   def test():
     main_resp = requests.get('https://api.github.com/repos/twbs/bootstrap')
-    cache_file_path = write_repo(main_resp.content)
+    mean_stars_per_issue = get_mean_stars_per_issue()
+    cache_file_path = write_repo(main_resp.content, mean_stars_per_issue)
     mod_time = os.path.getmtime(cache_file_path)
     assert time.time() - mod_time < 1, time.time() - mod_time
-    mean_stars_per_issue = get_mean_stars_per_issue()
     print 'mean_stars_per_issue:', mean_stars_per_issue
     rate_repo(calc_score.fake_repo_dict, mean_stars_per_issue)
     assert calc_score.fake_repo_dict['explanation']
