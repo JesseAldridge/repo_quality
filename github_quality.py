@@ -35,7 +35,6 @@ def pull_paths(paths, ignore_cache=False):
     except Exception as e:
       print 'error reading:', path
       print 'exception:', e
-      raise
       continue
 
   mean_stars_per_issue = (
