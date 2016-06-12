@@ -4,7 +4,7 @@ import requests, arrow, flask
 from werkzeug import exceptions
 
 from stuff import secrets
-import config, l0_repo, soft_train
+import config, repo_util, soft_train
 
 if not os.path.exists(config.cache_dir_path):
   os.mkdir(config.cache_dir_path)
@@ -13,7 +13,7 @@ class g:
   search_reset_time = None
 
 def pull_paths(paths, ignore_cache=False):
-  mean_stars_per_issue = l0_repo.get_mean_stars_per_issue()
+  mean_stars_per_issue = repo_util.get_mean_stars_per_issue()
   repo_dicts = []
   min_score, max_score = None, None
   stars_per_issue_list = []
@@ -76,14 +76,14 @@ class SearchAPI:
 
 search_api = SearchAPI()
 def pull_repo(repo_path, mean_stars_per_issue, auth=None, ignore_cache=False):
-  l0_repo.validate_path(repo_path)
+  repo_util.validate_path(repo_path)
   cache_file_path = os.path.join(config.cache_dir_path, repo_path.replace('/', '_') + '.txt')
   if not os.path.exists(cache_file_path) or ignore_cache:
     print 'pulling info:', cache_file_path
     main_resp = requests.get('https://api.github.com/repos/' + repo_path, auth=auth)
     if main_resp.status_code == 200:
       print 'main xrate-limit-remaining:', main_resp.headers['x-ratelimit-remaining']
-      l0_repo.write_repo(main_resp.content, mean_stars_per_issue, repo_path)
+      repo_util.write_repo(main_resp.content, mean_stars_per_issue, repo_path)
     else:
       raise exceptions.NotFound()
   with open(cache_file_path) as f:
@@ -97,7 +97,7 @@ def pull_repo(repo_path, mean_stars_per_issue, auth=None, ignore_cache=False):
   else:
     repo_dict['age'] = arrow.now() - arrow.get(repo_dict['created_at'])
   if not 'score' in repo_dict:
-    l0_repo.rate_repo(repo_dict, mean_stars_per_issue)
+    repo_util.rate_repo(repo_dict, mean_stars_per_issue)
 
   return repo_dict
 

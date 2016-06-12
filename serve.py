@@ -8,7 +8,7 @@ from werkzeug import exceptions
 
 import github_quality
 import config
-import l0_repo
+import repo_util
 
 app = flask.Flask(__name__)
 
@@ -17,7 +17,7 @@ app.jinja_env.variable_end_string = ')))'
 app.comment_start_string = '((#'
 app.comment_end_string = '#))'
 
-mean_stars_per_issue = l0_repo.get_mean_stars_per_issue()
+mean_stars_per_issue = repo_util.get_mean_stars_per_issue()
 
 repo_lists = {
     'connect_middleware': set([
