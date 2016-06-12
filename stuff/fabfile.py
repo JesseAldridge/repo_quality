@@ -17,6 +17,13 @@ def deploy_server():
     api.local('rsync --exclude=".git" --exclude="junk" -v -r {0} {1}@{2}:~'.format(
         proj_path, env.user, env.hosts[0]))
     api.sudo('pkill -HUP gunicorn')
+    # "Unable to resolve host" error is normal
+    print 'now do:'
+    print 'ssh repo_quality'
+    print 'ps aux | grep update_cache'
+    print 'sudo kill {pid}'
+    print 'sudo python update_cache_loop.py &'
+    print 'cmd+d to logoff'
 
 
 @api.task
