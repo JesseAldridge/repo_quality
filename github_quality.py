@@ -93,11 +93,12 @@ def pull_repo(repo_path, mean_stars_per_issue, auth=None, ignore_cache=False):
 
   # Set default values for keys I recently added to db (and therefore might be missing).
   repo_dict.setdefault('path', repo_path)
-  repo_dict.setdefault('age', (arrow.now() - arrow.get(repo_dict['created_at'])).total_seconds())
+  if 'age' in repo_dict:
+    repo_dict['age'] = datetime.timedelta(seconds=repo_dict['age'])
+  else:
+    repo_dict['age'] = arrow.now() - arrow.get(repo_dict['created_at'])
   if not 'score' in repo_dict:
     l0_repo.rate_repo(repo_dict, mean_stars_per_issue)
-
-  repo_dict['age'] = datetime.timedelta(seconds=repo_dict['age'])
 
   return repo_dict
 
