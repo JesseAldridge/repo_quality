@@ -1,4 +1,4 @@
-import json, os, re, getpass, glob, time, datetime
+import json, os, re, getpass, glob, time, datetime, traceback
 
 import requests, arrow, flask
 from werkzeug import exceptions
@@ -12,7 +12,7 @@ if not os.path.exists(config.cache_dir_path):
 class g:
   search_reset_time = None
 
-def pull_paths(paths, ignore_cache=False):
+def pull_paths(paths, auth=config.auth_, ignore_cache=False):
   mean_stars_per_issue = repo_util.get_mean_stars_per_issue()
   repo_dicts = []
   min_score, max_score = None, None
@@ -20,7 +20,7 @@ def pull_paths(paths, ignore_cache=False):
   for path in paths:
     try:
       repo_dict = pull_repo(
-        path, mean_stars_per_issue, auth=config.auth_, ignore_cache=ignore_cache)
+        path, mean_stars_per_issue, auth=auth, ignore_cache=ignore_cache)
       if min_score is None or repo_dict['score'] < min_score:
         min_score = repo_dict['score']
       if max_score is None or repo_dict['score'] > max_score:
@@ -34,7 +34,9 @@ def pull_paths(paths, ignore_cache=False):
       repo_dicts.append(repo_dict)
     except Exception as e:
       print 'error reading:', path
-      print 'exception:', e
+      print (u'exception: {}; {}'.format(type(e).__name__, e.message)).encode('utf8')
+      traceback.print_exc()
+
       continue
 
   mean_stars_per_issue = (
@@ -74,18 +76,38 @@ class SearchAPI:
   def can_use(self):
     return self.rate_limit is None or self.rate_limit > 0 or time.time() > self.reset_time
 
+class PullFailed(Exception):
+  pass
+
+class FailedSeveralTimes(Exception):
+  pass
+
 search_api = SearchAPI()
 def pull_repo(repo_path, mean_stars_per_issue, auth=None, ignore_cache=False):
   repo_util.validate_path(repo_path)
   cache_file_path = os.path.join(config.cache_dir_path, repo_path.replace('/', '_') + '.txt')
   if not os.path.exists(cache_file_path) or ignore_cache:
     print 'pulling info:', cache_file_path
+
     main_resp = requests.get('https://api.github.com/repos/' + repo_path, auth=auth)
-    if main_resp.status_code == 200:
-      print 'main xrate-limit-remaining:', main_resp.headers['x-ratelimit-remaining']
-      repo_util.write_repo(main_resp.content, mean_stars_per_issue, repo_path)
+    for _ in range(10):
+      if main_resp.status_code == 200:
+        print 'main xrate-limit-remaining:', main_resp.headers['x-ratelimit-remaining']
+        repo_util.write_repo(main_resp.content, mean_stars_per_issue, repo_path)
+        break
+      elif main_resp.status_code == 404:
+        raise exceptions.NotFound()
+      elif main_resp.status_code == 403:
+        reset_time = main_resp.headers['X-RateLimit-Reset']
+        print 'rate limit exceeded, sleeping for 60 seconds, reset_time:', reset_time
+        time.sleep(60)
+      else:
+        print 'pull failed:', main_resp.status_code
+        print '  resp:', main_resp.content[:100]
+        raise PullFailed()
     else:
-      raise exceptions.NotFound()
+      raise FailedSeveralTimes()
+
   with open(cache_file_path) as f:
     json_str = f.read()
   repo_dict = json.loads(json_str)
@@ -107,8 +129,7 @@ if __name__ == '__main__':
     with open(cache_file_path) as f:
       repo_dict = json.loads(f.read())
     paths.append(repo_dict['full_name'])
-  software_paths, _ = soft_train.classify(paths)
-  pull_paths(software_paths)
+  pull_paths(paths, auth=None, ignore_cache=True)
 
 
   # pull_paths([
