@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import re, json, os, time
 
-import requests
+import requests, arrow
 
 import config, calc_score
 from stuff import secrets
@@ -21,7 +21,7 @@ def validate_path(path):
   if len(path) > 100:
     raise PathLengthException()
 
-def write_repo(repo_dict, repo_path=None):
+def write_repo(repo_dict, mean_stars_per_issue, repo_path=None):
   if isinstance(repo_dict, basestring):
     repo_dict = json.loads(repo_dict)
   path = repo_path if repo_path else repo_dict['full_name']
@@ -29,9 +29,19 @@ def write_repo(repo_dict, repo_path=None):
   cache_file_path = os.path.join(config.cache_dir_path, path.replace('/', '_')) + '.txt'
   if 'created_at' not in repo_dict:
     raise BadRepoException()
+
+  repo_dict['path'] = path
+  repo_dict['age'] = (arrow.now() - arrow.get(repo_dict['created_at']))
+  rate_repo(repo_dict, mean_stars_per_issue)
+  now = arrow.utcnow()
+  repo_dict.setdefault('timestamp_to_score', {})
+  repo_dict['timestamp_to_score'][now.isoformat()] = repo_dict['score']
+  repo_dict['age'] = repo_dict['age'].total_seconds()
+
+  json_str = json.dumps(repo_dict, indent=2)
   print 'writing repo:', cache_file_path
   with open(cache_file_path, 'w') as f:
-    f.write(json.dumps(repo_dict, indent=2))
+    f.write(json_str)
   return cache_file_path
 
 def get_mean_stars_per_issue():

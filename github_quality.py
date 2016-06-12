@@ -1,4 +1,4 @@
-import json, os, re, getpass, glob, time
+import json, os, re, getpass, glob, time, datetime
 
 import requests, arrow, flask
 from werkzeug import exceptions
@@ -12,14 +12,15 @@ if not os.path.exists(config.cache_dir_path):
 class g:
   search_reset_time = None
 
-def pull_paths(paths):
+def pull_paths(paths, ignore_cache=False):
   mean_stars_per_issue = l0_repo.get_mean_stars_per_issue()
   repo_dicts = []
   min_score, max_score = None, None
   stars_per_issue_list = []
   for path in paths:
     try:
-      repo_dict = pull_repo(path, mean_stars_per_issue, auth=config.auth_)
+      repo_dict = pull_repo(
+        path, mean_stars_per_issue, auth=config.auth_, ignore_cache=ignore_cache)
       if min_score is None or repo_dict['score'] < min_score:
         min_score = repo_dict['score']
       if max_score is None or repo_dict['score'] > max_score:
@@ -34,6 +35,7 @@ def pull_paths(paths):
     except Exception as e:
       print 'error reading:', path
       print 'exception:', e
+      raise
       continue
 
   mean_stars_per_issue = (
@@ -74,36 +76,29 @@ class SearchAPI:
     return self.rate_limit is None or self.rate_limit > 0 or time.time() > self.reset_time
 
 search_api = SearchAPI()
-def pull_repo(repo_path, mean_stars_per_issue, auth=None):
+def pull_repo(repo_path, mean_stars_per_issue, auth=None, ignore_cache=False):
   l0_repo.validate_path(repo_path)
   cache_file_path = os.path.join(config.cache_dir_path, repo_path.replace('/', '_') + '.txt')
-  if not os.path.exists(cache_file_path):
+  if not os.path.exists(cache_file_path) or ignore_cache:
     print 'pulling info:', cache_file_path
     main_resp = requests.get('https://api.github.com/repos/' + repo_path, auth=auth)
     if main_resp.status_code == 200:
       print 'main xrate-limit-remaining:', main_resp.headers['x-ratelimit-remaining']
-      l0_repo.write_repo(main_resp.content, repo_path)
+      l0_repo.write_repo(main_resp.content, mean_stars_per_issue, repo_path)
     else:
       raise exceptions.NotFound()
-
   with open(cache_file_path) as f:
-    repo_dict = json.loads(f.read())
+    json_str = f.read()
+  repo_dict = json.loads(json_str)
 
-  if not 'closed_issues' in repo_dict and search_api.can_use():
-    closed_resp = requests.get(
-      'https://api.github.com/search/issues?q=repo:{}+is:issue+is:closed'.format(
-        repo_path), auth=auth)
-    search_api.rate_limit = int(closed_resp.headers['x-ratelimit-remaining'])
-    search_api.reset_time = int(closed_resp.headers['x-ratelimit-reset'])
-    print 'closed xrate-limit-remaining:', search_api.rate_limit
-    if closed_resp.status_code == 200:
-      repo_dict['closed_issues'] = json.loads(closed_resp.content)['total_count']
-      l0_repo.write_repo(repo_dict)
+  # Set default values for keys I recently added to db (and therefore might be missing).
+  repo_dict.setdefault('path', repo_path)
+  repo_dict.setdefault('age', (arrow.now() - arrow.get(repo_dict['created_at'])).total_seconds())
+  if not 'score' in repo_dict:
+    l0_repo.rate_repo(repo_dict, mean_stars_per_issue)
 
-  repo_dict['path'] = repo_path
-  repo_dict['age'] = arrow.now() - arrow.get(repo_dict['created_at'])
+  repo_dict['age'] = datetime.timedelta(seconds=repo_dict['age'])
 
-  l0_repo.rate_repo(repo_dict, mean_stars_per_issue)
   return repo_dict
 
 if __name__ == '__main__':
