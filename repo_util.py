@@ -34,7 +34,7 @@ def write_repo(repo_dict, mean_stars_per_issue, repo_path=None):
     with open(cache_file_path) as f:
       old_text = f.read()
     old_repo_dict = json.loads(old_text)
-    repo_dict['timestamp_to_score'] = old_repo_dict['timestamp_to_score']
+    repo_dict['timestamp_to_score'] = old_repo_dict.get('timestamp_to_score') or {}
 
   repo_dict['path'] = path
   repo_dict['age'] = (arrow.now() - arrow.get(repo_dict['created_at']))

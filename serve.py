@@ -98,6 +98,7 @@ repo_lists = {
         'pytest-dev/pytest'
     ],
     'web_frameworks': [
+        'koajs/koa',
         'meteor/meteor',
         'mitsuhiko/flask',
         'rails/rails',

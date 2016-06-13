@@ -5,7 +5,6 @@ import config, github_quality
 debug = False
 
 
-
 while True:
   repo_paths = []
   cache_paths = glob.glob(os.path.join(config.cache_dir_path, '*.txt'))
