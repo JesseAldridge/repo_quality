@@ -1,0 +1,12 @@
+digraph G {
+  pull_paths -> get_mean_stars_per_issue
+  pull_paths -> pull_repo
+  pull_repo -> validate_path
+  pull_repo -> "https://api.github.com/repos/{repo_path}"
+  "serve.py" -> "/<username>/<repo_name>"
+  "/<username>/<repo_name>" -> get_repo
+  get_repo -> pull_repo
+  repo_util -> rate_repo
+  rate_repo -> calc_score
+  "update_cache_loop.py" -> pull_paths
+}

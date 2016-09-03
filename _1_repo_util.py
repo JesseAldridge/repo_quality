@@ -3,7 +3,7 @@ import re, json, os, time
 
 import requests, arrow
 
-import config, calc_score
+import config, _0_calc_score
 from stuff import secrets
 
 class IllegalCharException(Exception):
@@ -64,7 +64,7 @@ def get_mean_stars_per_issue():
   return mean_stars_per_issue
 
 def rate_repo(repo_dict, mean_stars_per_issue):
-  score = calc_score.calc_score(repo_dict, mean_stars_per_issue)
+  score = _0_calc_score.calc_score(repo_dict, mean_stars_per_issue)
   rating, explanation = score_to_rating(score)
   rating_str = ''
   for i in range(rating):

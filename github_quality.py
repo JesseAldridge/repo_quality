@@ -83,36 +83,25 @@ class FailedSeveralTimes(Exception):
   pass
 
 search_api = SearchAPI()
-def pull_repo(repo_path, mean_stars_per_issue, auth=None, ignore_cache=False):
+
+
+def pull_repo_and_process(repo_path, mean_stars_per_issue, auth=None, ignore_cache=False):
+  # If not in cache, pull_repo.
+
   repo_util.validate_path(repo_path)
   cache_file_path = os.path.join(config.cache_dir_path, repo_path.replace('/', '_') + '.txt')
   if not os.path.exists(cache_file_path) or ignore_cache:
     print 'pulling info:', cache_file_path
+    pull_repo(repo_path)
 
-    main_resp = requests.get('https://api.github.com/repos/' + repo_path, auth=auth)
-    for _ in range(10):
-      if main_resp.status_code == 200:
-        print 'main xrate-limit-remaining:', main_resp.headers['x-ratelimit-remaining']
-        repo_util.write_repo(main_resp.content, mean_stars_per_issue, repo_path)
-        break
-      elif main_resp.status_code == 404:
-        raise exceptions.NotFound()
-      elif main_resp.status_code == 403:
-        reset_time = main_resp.headers['X-RateLimit-Reset']
-        print 'rate limit exceeded, sleeping for 60 seconds, reset_time:', reset_time
-        time.sleep(60)
-      else:
-        print 'pull failed:', main_resp.status_code
-        print '  resp:', main_resp.content[:100]
-        raise PullFailed()
-    else:
-      raise FailedSeveralTimes()
+  # Read repo from cache.
 
   with open(cache_file_path) as f:
     json_str = f.read()
   repo_dict = json.loads(json_str)
 
   # Set default values for keys I recently added to db (and therefore might be missing).
+
   repo_dict.setdefault('path', repo_path)
   if 'age' in repo_dict:
     repo_dict['age'] = datetime.timedelta(seconds=repo_dict['age'])
@@ -122,6 +111,48 @@ def pull_repo(repo_path, mean_stars_per_issue, auth=None, ignore_cache=False):
     repo_util.rate_repo(repo_dict, mean_stars_per_issue)
 
   return repo_dict
+
+def pull_repo(repo_path):
+  # Pull repo from GitHub and write to file.
+
+  for _ in range(10):
+    resp = requests.get('https://api.github.com/repos/' + repo_path, auth=auth)
+    if resp.status_code == 200:
+      owner_issue_count = pull_owner_issue_count(repo_path)
+      print 'main xrate-limit-remaining:', resp.headers['x-ratelimit-remaining']
+      repo_util.write_repo(resp.content, mean_stars_per_issue, repo_path, owner_issue_count)
+      break
+    elif resp.status_code == 404:
+      raise exceptions.NotFound()
+    elif resp.status_code == 403:
+      reset_time = resp.headers['X-RateLimit-Reset']
+      print 'rate limit exceeded, sleeping for 60 seconds, reset_time:', reset_time
+      time.sleep(60)
+    else:
+      print 'pull failed:', resp.status_code
+      print '  resp:', resp.content[:100]
+      raise PullFailed()
+  else:
+    raise FailedSeveralTimes()
+
+def pull_owner_issue_count(repo_path, repo_owner):
+  for _ in range(10):
+    url = 'https://api.github.com/search/issues?q=repo:{}+author:{}'.format(repo_path, repo_owner)
+    resp = requests.get(url, auth=auth)
+    if resp.status_code == 200:
+      return resp.content['total_count']
+    elif resp.status_code == 403:
+      reset_time = resp.headers['X-RateLimit-Reset']
+      print 'rate limit exceeded, sleeping for 60 seconds, reset_time:', reset_time
+      time.sleep(60)
+    else:
+      print 'pull failed:', resp.status_code
+      print '  resp:', resp.content[:100]
+      raise PullFailed()
+  else:
+    raise FailedSeveralTimes()
+
+
 
 if __name__ == '__main__':
   paths = []
