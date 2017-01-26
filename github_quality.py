@@ -19,8 +19,7 @@ def pull_paths(paths, auth=config.auth_, ignore_cache=False):
   stars_per_issue_list = []
   for path in paths:
     try:
-      repo_dict = pull_repo(
-        path, mean_stars_per_issue, auth=auth, ignore_cache=ignore_cache)
+      repo_dict = pull_repo(path, mean_stars_per_issue, auth=auth, ignore_cache=ignore_cache)
       if min_score is None or repo_dict['score'] < min_score:
         min_score = repo_dict['score']
       if max_score is None or repo_dict['score'] > max_score:
@@ -112,15 +111,18 @@ def pull_repo_and_process(repo_path, mean_stars_per_issue, auth=None, ignore_cac
 
   return repo_dict
 
-def pull_repo(repo_path):
+def pull_repo(repo_path, mean_stars_per_issue, auth, ignore_cache=False):
   # Pull repo from GitHub and write to file.
 
   for _ in range(10):
     resp = requests.get('https://api.github.com/repos/' + repo_path, auth=auth)
     if resp.status_code == 200:
-      owner_issue_count = pull_owner_issue_count(repo_path)
       print 'main xrate-limit-remaining:', resp.headers['x-ratelimit-remaining']
-      repo_util.write_repo(resp.content, mean_stars_per_issue, repo_path, owner_issue_count)
+      repo_dict = json.loads(resp.content)
+      repo_owner = repo_dict['owner']['login']
+      owner_issue_count = pull_owner_issue_count(repo_path, repo_owner)
+      repo_dict['repoq'] = {'owner_issue_count': owner_issue_count}
+      repo_util.write_repo(repo_dict, mean_stars_per_issue, repo_path)
       break
     elif resp.status_code == 404:
       raise exceptions.NotFound()

@@ -1,0 +1,16 @@
+
+serve.py
+  @app.route('/<username>/<repo_name>/')
+    def query_repo(username, repo_name):
+      repo_dict = get_repo('/'.join((username, repo_name)))
+        repo_dict = github_quality.pull_repo(repo_path, mean_stars_per_issue, auth=config.auth_)
+          resp = requests.get('https://api.github.com/repos/' + repo_path, auth=auth)
+          owner_issue_count = pull_owner_issue_count(repo_path)
+            url = 'https://api.github.com/search/issues?q=repo:{}+author:{}'.format(repo_path, repo_owner)
+            resp = requests.get(url, auth=auth)
+          repo_util.write_repo(resp.content, mean_stars_per_issue, repo_path, owner_issue_count)
+            cache_file_path = os.path.join(config.cache_dir_path, path.replace('/', '_')) + '.txt'
+              cache_dir_path = os.path.expanduser('~/.github_quality')
+            rate_repo(repo_dict, mean_stars_per_issue)
+              score = _0_calc_score.calc_score(repo_dict, mean_stars_per_issue)
+              rating, explanation = score_to_rating(score)

@@ -12,14 +12,14 @@ def calc_score(repo_dict, mean_stars_per_issue):
 
   if mean_stars_per_issue is not None:
     if repo_dict['has_issues']:
-      issue_count = repo_dict['open_issues_count']
+      issue_count = repo_dict['open_issues_count'] - repo_dict['repoq']['owner_issue_count']
     # (can hardcode issue counts for projects which don't use github for issues)
     elif repo_dict['full_name'] in hardcoded_issue_counts:
       issue_count = hardcoded_issue_counts[repo_dict['full_name']]
     else:
       issue_count = repo_dict['stargazers_count'] / mean_stars_per_issue
     repo_dict['issue_count'] = issue_count
-    repo_dict['score'] += repo_dict['stargazers_count'] / (issue_count or 1) * 20
+    repo_dict['score'] += repo_dict['stargazers_count'] / float(issue_count or 1) * 20
     return repo_dict['score']
 
 fake_repo_dict = {
@@ -27,7 +27,8 @@ fake_repo_dict = {
   'stargazers_count': 100,
   'has_issues': True,
   'open_issues_count': 10,
-  'age': datetime.timedelta(days=100)
+  'age': datetime.timedelta(days=100),
+  'repoq': {'owner_issue_count': 5}
 }
 
 if __name__ == '__main__':
