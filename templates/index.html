@@ -1,23 +1,10 @@
 {% extends 'wrapper.html' %}
 {% block content %}
   <p>Examples:<p>
-  <ul>
-    <li>
-      <p>Individual repos:</p>
-      <ul>
-        <li><a href='/twbs/bootstrap'>/twbs/bootstap</a></li>
-        <li><a href='/lodash/lodash'>/lodash/lodash</a></li>
-        <li><a href='/JesseAldridge/github_quality'>/JesseAldridge/github_quality</a></li>
-      </ul>
-    </li>
-    <li>
-      <p>Lists:</p>
-      <ul>
-      {% for list_name, list in repo_lists.iteritems() %}
-        <li><a href='/lists/(((list_name)))'>(((list_name)))</a></li>
-      {% endfor %}
-        <!-- <li><button>Import a list.</button></a> -->
-      </ul>
-    </li>
+    <ul>
+      <li><a href='/twbs/bootstrap'>/twbs/bootstap</a></li>
+      <li><a href='/lodash/lodash'>/lodash/lodash</a></li>
+      <li><a href='/JesseAldridge/repo_quality'>/JesseAldridge/repo_quality</a></li>
+    </ul>
   </ul>
 {% endblock %}

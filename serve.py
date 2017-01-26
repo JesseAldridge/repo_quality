@@ -6,9 +6,9 @@ import flask
 from flask import request
 from werkzeug import exceptions
 
-import github_quality
+import _2_repo_quality
 import config
-import repo_util
+import _1_repo_util
 
 app = flask.Flask(__name__)
 
@@ -17,7 +17,7 @@ app.jinja_env.variable_end_string = ')))'
 app.comment_start_string = '((#'
 app.comment_end_string = '#))'
 
-mean_stars_per_issue = repo_util.get_mean_stars_per_issue()
+mean_stars_per_issue = _1_repo_util.get_mean_stars_per_issue()
 
 repo_lists = {
     'connect_middleware': set([
@@ -658,7 +658,7 @@ def index():
 
 
 def get_repo(repo_path):
-    repo_dict = github_quality.pull_repo(repo_path, mean_stars_per_issue, auth=config.auth_)
+    repo_dict = _2_repo_quality.pull_repo(repo_path, mean_stars_per_issue, auth=config.auth_)
     return {k: repo_dict[k] for k in (
         'full_name', 'score', 'has_issues', 'rating_str', 'explanation', 'open_issues',
         'stargazers_count', 'age', 'closed_issues', 'timestamp_to_score') if k in repo_dict}
@@ -686,23 +686,24 @@ def send_js(path):
 @app.route('/<username>/<repo_name>/')
 def query_repo(username, repo_name):
     repo_dict = get_repo('/'.join((username, repo_name)))
+    repo_dict['age'] = datetime.timedelta(seconds=repo_dict['age'])
     repo_json = DateTimeEncoder().encode(repo_dict)
     return flask.render_template('repo.html', repo_json=repo_json)
 
 
-@app.route('/lists/<list_name>')
-def query_list(list_name):
-    paths = repo_lists[list_name] if list_name in repo_lists else None
-    if paths:
-        repos = []
-        for path in paths:
-            try:
-                repos.append(get_repo(path))
-            except exceptions.NotFound:
-                pass
-        list_json = DateTimeEncoder().encode(sorted(repos, key=lambda r: -r['score']))
-        return flask.render_template('list.html', list_json=list_json)
-    abort(404)
+# @app.route('/lists/<list_name>')
+# def query_list(list_name):
+#     paths = repo_lists[list_name] if list_name in repo_lists else None
+#     if paths:
+#         repos = []
+#         for path in paths:
+#             try:
+#                 repos.append(get_repo(path))
+#             except exceptions.NotFound:
+#                 pass
+#         list_json = DateTimeEncoder().encode(sorted(repos, key=lambda r: -r['score']))
+#         return flask.render_template('list.html', list_json=list_json)
+#     abort(404)
 
 
 if __name__ == '__main__':
