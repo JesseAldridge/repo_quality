@@ -3,7 +3,7 @@ import re, json, os, time
 
 import requests, arrow
 
-import config, calc_score
+import config, _0_calc_score
 from stuff import secrets
 
 class IllegalCharException(Exception):
@@ -64,7 +64,7 @@ def get_mean_stars_per_issue():
   return mean_stars_per_issue
 
 def rate_repo(repo_dict, mean_stars_per_issue):
-  score = calc_score.calc_score(repo_dict, mean_stars_per_issue)
+  score = _0_calc_score.calc_score(repo_dict, mean_stars_per_issue)
   rating, explanation = score_to_rating(score)
   rating_str = ''
   for i in range(rating):
@@ -91,10 +91,14 @@ if __name__ == '__main__':
   def test():
     main_resp = requests.get('https://api.github.com/repos/twbs/bootstrap')
     mean_stars_per_issue = get_mean_stars_per_issue()
-    cache_file_path = write_repo(main_resp.content, mean_stars_per_issue)
+    repo_dict = json.loads(main_resp.content)
+    pulls_resp = requests.get('https://api.github.com/repos/twbs/bootstrap/pulls')
+    repo_dict['pull_count'] = len(json.loads(pulls_resp.content))
+    cache_file_path = write_repo(repo_dict, mean_stars_per_issue)
+
     mod_time = os.path.getmtime(cache_file_path)
     assert time.time() - mod_time < 1, time.time() - mod_time
     print 'mean_stars_per_issue:', mean_stars_per_issue
-    rate_repo(calc_score.fake_repo_dict, mean_stars_per_issue)
-    assert calc_score.fake_repo_dict['explanation']
+    rate_repo(_0_calc_score.fake_repo_dict, mean_stars_per_issue)
+    assert _0_calc_score.fake_repo_dict['explanation']
   test()

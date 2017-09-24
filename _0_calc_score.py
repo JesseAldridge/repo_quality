@@ -27,7 +27,8 @@ fake_repo_dict = {
   'stargazers_count': 100,
   'has_issues': True,
   'open_issues_count': 10,
-  'age': datetime.timedelta(days=100)
+  'age': datetime.timedelta(days=100),
+  'pull_count': 2,
 }
 
 if __name__ == '__main__':
