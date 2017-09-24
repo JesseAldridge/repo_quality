@@ -4,7 +4,7 @@ import requests, arrow, flask
 from werkzeug import exceptions
 
 from stuff import secrets
-import config, _0_repo_util, _0_hit_api
+import config, _1_repo_util, _0_hit_api
 
 if not os.path.exists(config.cache_dir_path):
   os.mkdir(config.cache_dir_path)
@@ -13,7 +13,7 @@ class g:
   search_reset_time = None
 
 def pull_paths(paths, auth=config.auth_, ignore_cache=False):
-  mean_stars_per_issue = _0_repo_util.get_mean_stars_per_issue()
+  mean_stars_per_issue = _1_repo_util.get_mean_stars_per_issue()
   repo_dicts = []
   min_score, max_score = None, None
   stars_per_issue_list = []
@@ -78,14 +78,14 @@ class SearchAPI:
 
 search_api = SearchAPI()
 def pull_repo(repo_path, mean_stars_per_issue, auth=None, ignore_cache=False):
-  _0_repo_util.validate_path(repo_path)
+  _1_repo_util.validate_path(repo_path)
   cache_file_path = os.path.join(config.cache_dir_path, repo_path.replace('/', '_') + '.txt')
   if not os.path.exists(cache_file_path) or ignore_cache:
     print 'pulling info:', cache_file_path
     repo_dict = json.loads(_0_hit_api.hit_api(repo_path, auth))
     pulls = json.loads(_0_hit_api.hit_api(repo_path, auth, '/pulls'))
     repo_dict['pull_count'] = len(pulls)
-    _0_repo_util.write_repo(repo_dict, mean_stars_per_issue, repo_path)
+    _1_repo_util.write_repo(repo_dict, mean_stars_per_issue, repo_path)
 
   with open(cache_file_path) as f:
     json_str = f.read()
@@ -98,7 +98,7 @@ def pull_repo(repo_path, mean_stars_per_issue, auth=None, ignore_cache=False):
   else:
     repo_dict['age'] = arrow.now() - arrow.get(repo_dict['created_at'])
   if not 'score' in repo_dict:
-    _0_repo_util.rate_repo(repo_dict, mean_stars_per_issue)
+    _1_repo_util.rate_repo(repo_dict, mean_stars_per_issue)
 
   return repo_dict
 

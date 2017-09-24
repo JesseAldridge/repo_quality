@@ -1,6 +1,6 @@
 import glob, os, json, time
 
-import config, _1_repo_quality
+import config, _2_repo_quality
 
 debug = False
 
@@ -18,7 +18,7 @@ while True:
         print 'error reading {}: {}'.format(config.cache_dir_path, e)
         continue
     repo_paths.append(repo_dict['full_name'])
-  _1_repo_quality.pull_paths(repo_paths, ignore_cache=True)
+  _2_repo_quality.pull_paths(repo_paths, ignore_cache=True)
 
   if debug:
     time.sleep(1)
