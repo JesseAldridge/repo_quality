@@ -23,7 +23,7 @@ get the best
       print 'num:', len(most_starred['items'])
 
 
-serve.py
+_3_serve.py
   @app.route('/')
   def index():
     print 'lists:', repo_lists
@@ -147,3 +147,11 @@ serve.py
             return flask.render_template('list.html', list_json=list_json)
           abort(404)
       {% endfor %}
+
+  @app.route('/<username>/<repo_name>')
+  @app.route('/<username>/<repo_name>/')
+  def query_repo(username, repo_name):
+    repo_dict = _2_repo_quality.pull_repo(repo_path, mean_stars_per_issue, auth=config.auth_)
+    return {k: repo_dict[k] for k in (
+        'full_name', 'score', 'has_issues', 'rating_str', 'explanation', 'open_issues',
+        'stargazers_count', 'age', 'closed_issues', 'timestamp_to_score') if k in repo_dict}

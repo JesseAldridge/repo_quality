@@ -21,7 +21,7 @@
   </div>
   <div ng-if="repo_obj.has_issues">
     <span class='repo-label'>Open issues:</span>
-    <span>{{repo_obj.open_issues}}</span>
+    <span>{{repo_obj.issue_count}}</span>
   </div>
   <div ng-if="repo_obj.has_issues">
     <span class='repo-label'>Closed issues:</span>
@@ -29,7 +29,7 @@
   </div>
   <div ng-if="repo_obj.has_issues">
     <span class='repo-label'>Stars / Open Issues:</span>
-    <span>{{(repo_obj.stargazers_count / (repo_obj.open_issues || 1)).toFixed(0)}}</span>
+    <span>{{(repo_obj.stargazers_count / (repo_obj.issue_count || 1)).toFixed(0)}}</span>
   </div>
   <div>
     <span class='repo-label'>Stars / Age:</span>
