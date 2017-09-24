@@ -13,6 +13,6 @@ sudo nohup gunicorn -w 4 serve:app -b 0.0.0.0:80 --log-file=stderr.log --enable-
 sudo tail nohup.out
 ps aux | grep python
 history
-killall python
+sudo killall python
 sudo killall gunicorn
 df -h

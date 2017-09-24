@@ -6,9 +6,9 @@ import flask
 from flask import request
 from werkzeug import exceptions
 
-import github_quality
+import _2_repo_quality
 import config
-import repo_util
+import _1_repo_util
 from repo_lists import repo_lists
 
 app = flask.Flask(__name__)
@@ -18,7 +18,7 @@ app.jinja_env.variable_end_string = ')))'
 app.comment_start_string = '((#'
 app.comment_end_string = '#))'
 
-mean_stars_per_issue = repo_util.get_mean_stars_per_issue()
+mean_stars_per_issue = _1_repo_util.get_mean_stars_per_issue()
 
 
 @app.route('/')
@@ -28,7 +28,7 @@ def index():
 
 
 def get_repo(repo_path):
-    repo_dict = github_quality.pull_repo(repo_path, mean_stars_per_issue, auth=config.auth_)
+    repo_dict = _2_repo_quality.pull_repo(repo_path, mean_stars_per_issue, auth=config.auth_)
     return {k: repo_dict[k] for k in (
         'full_name', 'score', 'has_issues', 'rating_str', 'explanation', 'open_issues',
         'stargazers_count', 'age', 'closed_issues', 'timestamp_to_score') if k in repo_dict}

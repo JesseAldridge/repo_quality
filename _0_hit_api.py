@@ -1,4 +1,5 @@
 import requests
+from werkzeug import exceptions
 
 class PullFailed(Exception):
   pass
