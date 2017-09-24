@@ -4,7 +4,7 @@ import requests, arrow, flask
 from werkzeug import exceptions
 
 from stuff import secrets
-import config, repo_util, soft_train
+import config, _0_repo_util, _0_hit_api
 
 if not os.path.exists(config.cache_dir_path):
   os.mkdir(config.cache_dir_path)
@@ -13,7 +13,7 @@ class g:
   search_reset_time = None
 
 def pull_paths(paths, auth=config.auth_, ignore_cache=False):
-  mean_stars_per_issue = repo_util.get_mean_stars_per_issue()
+  mean_stars_per_issue = _0_repo_util.get_mean_stars_per_issue()
   repo_dicts = []
   min_score, max_score = None, None
   stars_per_issue_list = []
@@ -76,37 +76,16 @@ class SearchAPI:
   def can_use(self):
     return self.rate_limit is None or self.rate_limit > 0 or time.time() > self.reset_time
 
-class PullFailed(Exception):
-  pass
-
-class FailedSeveralTimes(Exception):
-  pass
-
 search_api = SearchAPI()
 def pull_repo(repo_path, mean_stars_per_issue, auth=None, ignore_cache=False):
-  repo_util.validate_path(repo_path)
+  _0_repo_util.validate_path(repo_path)
   cache_file_path = os.path.join(config.cache_dir_path, repo_path.replace('/', '_') + '.txt')
   if not os.path.exists(cache_file_path) or ignore_cache:
     print 'pulling info:', cache_file_path
-
-    main_resp = requests.get('https://api.github.com/repos/' + repo_path, auth=auth)
-    for _ in range(10):
-      if main_resp.status_code == 200:
-        print 'main xrate-limit-remaining:', main_resp.headers['x-ratelimit-remaining']
-        repo_util.write_repo(main_resp.content, mean_stars_per_issue, repo_path)
-        break
-      elif main_resp.status_code == 404:
-        raise exceptions.NotFound()
-      elif main_resp.status_code == 403:
-        reset_time = main_resp.headers['X-RateLimit-Reset']
-        print 'rate limit exceeded, sleeping for 60 seconds, reset_time:', reset_time
-        time.sleep(60)
-      else:
-        print 'pull failed:', main_resp.status_code
-        print '  resp:', main_resp.content[:100]
-        raise PullFailed()
-    else:
-      raise FailedSeveralTimes()
+    repo_dict = json.loads(_0_hit_api.hit_api(repo_path, auth))
+    pulls = json.loads(_0_hit_api.hit_api(repo_path, auth, '/pulls'))
+    repo_dict['pull_count'] = len(pulls)
+    _0_repo_util.write_repo(repo_dict, mean_stars_per_issue, repo_path)
 
   with open(cache_file_path) as f:
     json_str = f.read()
@@ -119,7 +98,7 @@ def pull_repo(repo_path, mean_stars_per_issue, auth=None, ignore_cache=False):
   else:
     repo_dict['age'] = arrow.now() - arrow.get(repo_dict['created_at'])
   if not 'score' in repo_dict:
-    repo_util.rate_repo(repo_dict, mean_stars_per_issue)
+    _0_repo_util.rate_repo(repo_dict, mean_stars_per_issue)
 
   return repo_dict
 

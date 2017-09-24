@@ -42,6 +42,7 @@ repo_lists = {
         'emberjs/ember.js',
         'lhorie/mithril.js',
         'Polymer/polymer',
+        'reactjs/redux',
         'riot/riot'
     ],
     'hundred_best': [

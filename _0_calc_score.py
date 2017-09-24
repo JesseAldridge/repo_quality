@@ -12,7 +12,7 @@ def calc_score(repo_dict, mean_stars_per_issue):
 
   if mean_stars_per_issue is not None:
     if repo_dict['has_issues']:
-      issue_count = repo_dict['open_issues_count']
+      issue_count = repo_dict['open_issues_count'] - repo_dict['pull_count']
     # (can hardcode issue counts for projects which don't use github for issues)
     elif repo_dict['full_name'] in hardcoded_issue_counts:
       issue_count = hardcoded_issue_counts[repo_dict['full_name']]
