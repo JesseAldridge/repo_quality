@@ -31,6 +31,15 @@ fake_repo_dict = {
   'pull_count': 2,
 }
 
+missing_pull_count = {
+  'full_name': 'fake_user/fake_repo',
+  'stargazers_count': 100,
+  'has_issues': True,
+  'open_issues_count': 10,
+  'age': datetime.timedelta(days=100),
+}
+
+
 if __name__ == '__main__':
   # Test
 

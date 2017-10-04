@@ -1,6 +1,4 @@
-import os
-import json
-import datetime
+import os, json, datetime, sys, traceback
 
 import flask
 from flask import request
@@ -12,6 +10,7 @@ import _1_repo_util
 import _0_repo_lists
 
 app = flask.Flask(__name__)
+port = int(sys.argv[1]) if len(sys.argv) == 2 else 80
 
 app.jinja_env.variable_start_string = '((('
 app.jinja_env.variable_end_string = ')))'
@@ -74,15 +73,14 @@ def query_list(list_name):
     for path in paths:
       try:
         repos.append(get_repo(path))
-      except exceptions.NotFound:
-        pass
+      except Exception as e:
+        print (u'exception: {}; {}'.format(type(e).__name__, e.message)).encode('utf8')
+        traceback.print_exc()
     list_json = DateTimeEncoder().encode(sorted(repos, key=lambda r: -r['score']))
     return flask.render_template('list.html', list_json=list_json)
   abort(404)
 
 
 if __name__ == '__main__':
-  # Bind to PORT if defined, otherwise default to 3000.
-  port = int(os.environ.get('PORT', 3000))
   app.config['TEMPLATES_AUTO_RELOAD'] = True
-  app.run(host='0.0.0.0', port=port, debug=os.environ.get('DEBUG', True))
+  app.run(host='0.0.0.0', port=port, debug=(port != 80))
