@@ -9,7 +9,7 @@ from werkzeug import exceptions
 import _2_repo_quality
 import config
 import _1_repo_util
-from repo_lists import repo_lists
+import _0_repo_lists
 
 app = flask.Flask(__name__)
 
@@ -23,6 +23,7 @@ mean_stars_per_issue = _1_repo_util.get_mean_stars_per_issue()
 
 @app.route('/')
 def index():
+  repo_lists = _0_repo_lists.repo_lists
   print 'lists:', repo_lists
   return flask.render_template('index.html', repo_lists=repo_lists)
 
@@ -66,6 +67,7 @@ def query_repo(username, repo_name):
 
 @app.route('/lists/<list_name>')
 def query_list(list_name):
+  repo_lists = _0_repo_lists.repo_lists
   paths = repo_lists[list_name] if list_name in repo_lists else None
   if paths:
     repos = []
@@ -80,6 +82,7 @@ def query_list(list_name):
 
 
 if __name__ == '__main__':
-  # Bind to PORT if defined, otherwise default to 5000.
+  # Bind to PORT if defined, otherwise default to 3000.
   port = int(os.environ.get('PORT', 3000))
+  app.config['TEMPLATES_AUTO_RELOAD'] = True
   app.run(host='0.0.0.0', port=port, debug=os.environ.get('DEBUG', True))
