@@ -96,7 +96,9 @@ repo_lists = collections.OrderedDict([
         'lhorie/mithril.js',
         'Polymer/polymer',
         'reactjs/redux',
-        'riot/riot'
+        'riot/riot',
+        'stimulusjs/stimulus',
+        'LeadDyno/intercooler-js',
     ]),
     ('git_guis', [
         'pieter/gitx',
@@ -109,7 +111,7 @@ repo_lists = collections.OrderedDict([
     ('graphing', [
       'd3/d3',
       'chartjs/Chart.js',
-      'flot/flot 260',
+      'flot/flot',
     ]),
     ('hapi_plugins', [
         'franciscogouveia/hapi-rbac',
