@@ -10,7 +10,6 @@ import _1_repo_util
 import _0_repo_lists
 
 app = flask.Flask(__name__)
-port = int(sys.argv[1]) if len(sys.argv) == 2 else 80
 
 app.jinja_env.variable_start_string = '((('
 app.jinja_env.variable_end_string = ')))'
@@ -82,5 +81,4 @@ def query_list(list_name):
 
 
 if __name__ == '__main__':
-  app.config['TEMPLATES_AUTO_RELOAD'] = True
-  app.run(host='0.0.0.0', port=port, debug=(port != 80))
+  app.run(host='0.0.0.0')

@@ -1,6 +1,6 @@
 ssh repo_quality
 
-rm -rf repo_quality.older
+sudo rm -rf repo_quality.older
 sudo cp -r repo_quality.old repo_quality.older
 
 cd repo_quality

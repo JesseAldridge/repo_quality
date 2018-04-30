@@ -14,6 +14,7 @@ def hit_api(repo_path, auth, suffix=''):
       print 'main xrate-limit-remaining:', main_resp.headers['x-ratelimit-remaining']
       return main_resp.content
     elif main_resp.status_code == 404:
+      print 'repo not found: {}'.format(repo_path)
       raise exceptions.NotFound()
     elif main_resp.status_code == 403:
       reset_time = main_resp.headers['X-RateLimit-Reset']

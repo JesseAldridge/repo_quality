@@ -9,10 +9,19 @@
 
   .controller('MyController', function($scope) {
     $scope.repo_list = JSON.parse( '(((list_json|safe)))' );
-  })
+    $scope.repo_list.forEach(function(repo_obj, index) {
+      repo_obj.index = index;
+    });
+  });
+
+  var repo_list = JSON.parse('(((list_json|safe)))');
+  window.onload = function() {
+    add_graphs(repo_list)
+  };
 </script>
 
 <div ng-controller="MyController" ng-app="myApp">
-  <div ng-include="'/templates/repo_templ.html'" ng-repeat="repo_obj in repo_list"></div>
+  <div ng-include="'/templates/repo_templ.html'" ng-repeat="repo_obj in repo_list">
+  </div>
 </div>
 {% endblock %}

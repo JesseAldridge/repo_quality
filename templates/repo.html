@@ -9,7 +9,13 @@
 
   .controller('MyController', function($scope) {
     $scope.repo_obj = JSON.parse('(((repo_json|safe)))');
-  })
+    $scope.repo_obj.index = 0;
+  });
+
+  var repo_obj = JSON.parse('(((repo_json|safe)))');
+  window.onload = function() {
+    add_graphs([repo_obj]);
+  };
 </script>
 
 <div ng-controller="MyController" ng-app="myApp" ng-include="'/templates/repo_templ.html'">
