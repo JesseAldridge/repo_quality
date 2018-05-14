@@ -52,16 +52,18 @@ def write_repo(repo_dict, mean_stars_per_issue, repo_path=None):
   return cache_file_path
 
 def get_mean_stars_per_issue():
-  print 'getting mean_stars_per_issue'
-  resp = requests.get(
-    'https://repo-quality.firebaseio.com/mean_stars_per_issue.json?auth=' +
-    secrets.firebase_token)
-  try:
-    mean_stars_per_issue = json.loads(resp.content)
-  except Exception as e:
-    print 'error loading mean_stars_per_issue:', e
-    mean_stars_per_issue = 10
-  return mean_stars_per_issue
+  # print 'getting mean_stars_per_issue'
+  # resp = requests.get(
+  #   'https://repo-quality.firebaseio.com/mean_stars_per_issue.json?auth=' +
+  #   secrets.firebase_token)
+  # try:
+  #   mean_stars_per_issue = json.loads(resp.content)
+  # except Exception as e:
+  #   print 'error loading mean_stars_per_issue:', e
+  #   mean_stars_per_issue = 10
+  # return mean_stars_per_issue
+
+  return 10
 
 def rate_repo(repo_dict, mean_stars_per_issue):
   score = _0_calc_score.calc_score(repo_dict, mean_stars_per_issue)
