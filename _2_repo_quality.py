@@ -90,6 +90,10 @@ def pull_repo(repo_path, mean_stars_per_issue, auth=None, ignore_cache=False):
     json_str = f.read()
   repo_dict = json.loads(json_str)
 
+  # Redirect to new repo
+  if repo_dict.get('path') != repo_dict.get('full_name'):
+    return pull_repo(repo_dict.get('full_name'), mean_stars_per_issue, auth, ignore_cache)
+
   # Set default values for keys I recently added to db (and therefore might be missing).
   repo_dict.setdefault('path', repo_path)
   if 'age' in repo_dict:

@@ -12,10 +12,15 @@ sudo killall -r gunicorn
 sudo nohup python _3_update_cache_loop.py &
 sudo nohup gunicorn -w 4 _3_serve:app -b 0.0.0.0:80 --log-file=stderr.log --enable-stdio-inheritance &
 
-# debugging
-sudo tail nohup.out
+# output written to: sudo tail nohup.out
+
+# additional debugging
 ps aux | grep python
 history
 sudo killall python
 sudo killall gunicorn
 df -h
+
+# to test an individual repo:
+
+# data written to:
