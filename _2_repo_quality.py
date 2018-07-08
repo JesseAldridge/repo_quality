@@ -38,15 +38,15 @@ def pull_paths(paths, auth=config.auth_, ignore_cache=False):
 
       continue
 
-  mean_stars_per_issue = (
-    sum(stars_per_issue_list) / float(len(stars_per_issue_list))
-    if stars_per_issue_list else config.default_stars_per_issue)
-  requests.patch(
-    'https://repo-quality.firebaseio.com/.json?auth=' + secrets.firebase_token,
-    data=json.dumps({
-      'mean_stars_per_issue': mean_stars_per_issue,
-      'min_score': min_score, 'max_score': max_score
-    }))
+  # mean_stars_per_issue = (
+  #   sum(stars_per_issue_list) / float(len(stars_per_issue_list))
+  #   if stars_per_issue_list else config.default_stars_per_issue)
+  # requests.patch(
+  #   'https://repo-quality.firebaseio.com/.json?auth=' + secrets.firebase_token,
+  #   data=json.dumps({
+  #     'mean_stars_per_issue': mean_stars_per_issue,
+  #     'min_score': min_score, 'max_score': max_score
+  #   }))
 
   for repo_dict in sorted(repo_dicts, key=lambda d: -d['score']):
     print '        path:', repo_dict['path']

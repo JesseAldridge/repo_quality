@@ -6,9 +6,8 @@ hardcoded_issue_counts = {
 }
 
 def calc_score(repo_dict, mean_stars_per_issue):
-  repo_dict['score'] = (
-    repo_dict['stargazers_count'] * .01 +
-    repo_dict['stargazers_count'] / repo_dict['age'].days * 2)
+  repo_dict['score'] = repo_dict['stargazers_count'] * .01
+  repo_dict['score'] += repo_dict['stargazers_count'] / (repo_dict['age'].days or 1) * 2
 
   if mean_stars_per_issue is not None:
     if repo_dict['has_issues']:
