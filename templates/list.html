@@ -16,6 +16,7 @@
 
   var repo_list = JSON.parse('(((list_json|safe)))');
   window.onload = function() {
+    console.log('repo 0:', d3.select('#repo-0')._groups[0]);
     console.log('adding graphs, repo_obj:', repo_list);
     add_graphs(repo_list)
   };

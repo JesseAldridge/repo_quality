@@ -20,8 +20,6 @@ function time_series(data_objs, element_tag, x_axis_str, y_axis_str) {
   .attr('height', height + margin.top + margin.bottom)
   .attr('class', 'chart');
 
-  console.log('chart:', chart);
-
   var main = chart.append('g')
   .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
   .attr('width', width)
@@ -57,14 +55,6 @@ function time_series(data_objs, element_tag, x_axis_str, y_axis_str) {
       .text(y_axis_str);
 
   var g = main.append("svg:g");
-
-  // g.selectAll("scatter-dots")
-  //   .data(data_objs)
-  //   .enter().append("svg:circle")
-  //       .attr("cx", function (d,i) { return x(d.timestamp); } )
-  //       .attr("cy", function (d) { return y(d.value); } )
-  //       .attr("r", 4);
-
 
   var line = d3.line()
     .x(function(d) { return x(d.timestamp); })
