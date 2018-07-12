@@ -36,11 +36,6 @@ def get_repo(repo_path):
   }
   whitelisted_dict['issue_count'] = repo_dict['open_issues'] - repo_dict.get('pull_count', 0)
 
-  orig_dict = whitelisted_dict['timestamp_to_score']
-  whitelisted_dict['timestamp_to_score'] = {
-    key: orig_dict[key] for key in sorted(orig_dict.keys())[-100:]
-  }
-
   return whitelisted_dict
 
 
