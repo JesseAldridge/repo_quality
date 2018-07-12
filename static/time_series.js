@@ -18,13 +18,15 @@ function time_series(data_objs, element_tag, x_axis_str, y_axis_str) {
   .append('svg:svg')
   .attr('width', width + margin.right + margin.left)
   .attr('height', height + margin.top + margin.bottom)
-  .attr('class', 'chart')
+  .attr('class', 'chart');
+
+  console.log('chart:', chart);
 
   var main = chart.append('g')
   .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
   .attr('width', width)
   .attr('height', height)
-  .attr('class', 'main')
+  .attr('class', 'main');
 
   // draw the x axis
   main.append('g')
