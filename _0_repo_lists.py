@@ -620,6 +620,18 @@ repo_lists = collections.OrderedDict([
         "pkulchenko/ZeroBranePackage",
         "antirez/redis-io"
     ]),
+    ('terminal_ui', [
+        'gizak/termui',
+        'mabe02/lanterna',
+        'jroimartin/gocui',
+        'VladimirMarkelov/clui',
+        'cznic/wm',
+        'marcusolsson/tui-go',
+        'JoelOtter/termloop',
+        'rivo/tview',
+        'Shopify/cli-ui',
+        'mabe02/lanterna',
+    ]),
     ('vue_state', [
         'visionmedia/superagent',
         'vuejs/vuex',
