@@ -630,7 +630,9 @@ repo_lists = collections.OrderedDict([
         'JoelOtter/termloop',
         'rivo/tview',
         'Shopify/cli-ui',
-        'mabe02/lanterna',
+        'urwid/urwid',
+        'jonathanslenders/python-prompt-toolkit/',
+        'gdamore/tcell',
     ]),
     ('vue_state', [
         'visionmedia/superagent',
