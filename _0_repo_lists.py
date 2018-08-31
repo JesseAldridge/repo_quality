@@ -101,6 +101,18 @@ repo_lists = collections.OrderedDict([
         'stimulusjs/stimulus',
         'vuejs/vue',
     ]),
+    ('filesystem_monitor', [
+        'fsnotify/fsnotify',
+        'radovskyb/watcher',
+        'howeyc/fsnotify',
+        'gorakhargosh/watchdog',
+        'ljmccarthy/fsmonitor',
+        'guard/guard',
+        'seb-m/pyinotify',
+        'rvoicilas/inotify-tools',
+        'jbd/treewatcher',
+        'pke/file.monitor',
+    ]),
     ('git_guis', [
         'pieter/gitx',
         'rowanj/gitx',
@@ -633,6 +645,7 @@ repo_lists = collections.OrderedDict([
         'urwid/urwid',
         'jonathanslenders/python-prompt-toolkit/',
         'gdamore/tcell',
+        'nsf/termbox',
     ]),
     ('vue_state', [
         'visionmedia/superagent',
