@@ -632,12 +632,10 @@ repo_lists = collections.OrderedDict([
         "pkulchenko/ZeroBranePackage",
         "antirez/redis-io"
     ]),
-    ('servers', [
+    ('wsgi_servers', [
         'benoitc/gunicorn',
         'Pylons/waitress',
         'cherrypy/cherrypy',
-        'tornadoweb/tornado',
-        'twisted/twisted',
         'unbit/uwsgi',
     ]),
     ('terminal_ui', [
@@ -654,6 +652,8 @@ repo_lists = collections.OrderedDict([
         'jonathanslenders/python-prompt-toolkit/',
         'gdamore/tcell',
         'nsf/termbox',
+        'chjj/blessed',
+        'cronvel/terminal-kit',
     ]),
     ('vue_state', [
         'visionmedia/superagent',
@@ -748,6 +748,7 @@ repo_lists = collections.OrderedDict([
         'meteor/meteor',
         'mitsuhiko/flask',
         'rails/rails',
+        'tornadoweb/tornado',
         'django/django',
         'phoenixframework/phoenix',
         'balderdashy/sails',
