@@ -632,6 +632,14 @@ repo_lists = collections.OrderedDict([
         "pkulchenko/ZeroBranePackage",
         "antirez/redis-io"
     ]),
+    ('servers', [
+        'benoitc/gunicorn',
+        'Pylons/waitress',
+        'cherrypy/cherrypy',
+        'tornadoweb/tornado',
+        'twisted/twisted',
+        'unbit/uwsgi',
+    ]),
     ('terminal_ui', [
         'gizak/termui',
         'mabe02/lanterna',
