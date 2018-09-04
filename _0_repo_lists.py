@@ -753,6 +753,7 @@ repo_lists = collections.OrderedDict([
         'reggoodwin/ferrit',
     ]),
     ('web_frameworks', [
+        'MasoniteFramework/masonite',
         'koajs/koa',
         'go-martini/martini',
         'meteor/meteor',
