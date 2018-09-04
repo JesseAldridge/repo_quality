@@ -50,3 +50,10 @@ if __name__ == '__main__':
     'has_issues': False,
     'age': datetime.timedelta(days=100)
   }, mean_stars_per_issue=30)
+
+  print calc_score({
+    'full_name': 'foo/bar',
+    'stargazers_count': 1,
+    'has_issues': False,
+    'age': datetime.timedelta(days=400),
+  }, mean_stars_per_issue=10)
