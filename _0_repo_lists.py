@@ -786,4 +786,15 @@ repo_lists = collections.OrderedDict([
     ('wysiwyg', [
         'froala/wysiwyg-editor',
     ]),
+    ('xml_libs', [
+        'martinblech/xmltodict',
+        'nfarina/xmldoc',
+        'FasterXML/aalto-xml',
+        'zeux/pugixml',
+        'snoyberg/xml',
+        'omegahat/XML',
+        'KirillOsenkov/XmlParser',
+        'sabre-io/xml',
+        'tafia/quick-xml',
+    ]),
 ])
