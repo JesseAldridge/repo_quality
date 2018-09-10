@@ -250,6 +250,18 @@ repo_lists = collections.OrderedDict([
         'z0mt3c/hapi-swaggered',
         'z0mt3c/hapi-swaggered-ui',
     ]),
+    ('html_parsing', [
+        'paquettg/php-html-parser',
+        'lexborisov/myhtml',
+        'ericchiang/pup',
+        'developit/htmlParser',
+        'posthtml/posthtml-parser',
+        'philss/floki',
+        'jquery/jquery/issues/2941',
+        'ressio/pharse',
+        'cheeriojs/cheerio',
+        'google/gumbo-parser',
+    ]),
     ('hundred_best', [
         'lodash/lodash',
         'jlmakes/scrollreveal.js',
@@ -796,5 +808,6 @@ repo_lists = collections.OrderedDict([
         'KirillOsenkov/XmlParser',
         'sabre-io/xml',
         'tafia/quick-xml',
+        'lxml/lxml',
     ]),
 ])
