@@ -364,7 +364,15 @@ repo_lists = collections.OrderedDict([
         'davatron5000/FitText.js',
         'isagalaev/highlight.js'
     ]),
-    ('javascript_unit_tests', [
+    ('javascript_testing', [
+        'jsdom/jsdom',
+        'SeleniumHQ/selenium',
+        'appium/appium',
+        'angular/protractor',
+        'GoogleChrome/puppeteer',
+        'segmentio/nightmare',
+        'casperjs/casperjs',
+        'Codeception/CodeceptJS',
         'karma-runner/karma',
         'chaijs/chai',
         'unexpectedjs/unexpected',
