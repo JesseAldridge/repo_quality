@@ -364,6 +364,16 @@ repo_lists = collections.OrderedDict([
         'davatron5000/FitText.js',
         'isagalaev/highlight.js'
     ]),
+    ('javascript_templates', [
+        'wycats/handlebars.js',
+        'mde/ejs',
+        'janl/mustache.js',
+        'olado/doT',
+        'jashkenas/underscore',
+        'pugjs/pug',
+        'baryshev/ect',
+        'nolimits4web/template7',
+    ]),
     ('javascript_testing', [
         'jsdom/jsdom',
         'SeleniumHQ/selenium',
