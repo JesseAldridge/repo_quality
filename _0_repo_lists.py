@@ -1014,6 +1014,8 @@ repo_lists = collections.OrderedDict([
     'pmaupin/pdfrw',
     'JazzCore/python-pdfkit',
     'yob/pdf-reader',
+    'modesty/pdf2json',
+    'mozilla/pdf.js',
   ]),
   ('programming_languages', [
       'Microsoft/dotnet',
