@@ -1,6 +1,53 @@
 import collections
 
 repo_lists = collections.OrderedDict([
+  # bogus comment to unbreak Sublime code folding
+  # bogus comment to unbreak Sublime code folding
+  # bogus comment to unbreak Sublime code folding
+  # bogus comment to unbreak Sublime code folding
+  # bogus comment to unbreak Sublime code folding
+  # bogus comment to unbreak Sublime code folding
+  # bogus comment to unbreak Sublime code folding
+  # bogus comment to unbreak Sublime code folding
+  # bogus comment to unbreak Sublime code folding
+  # bogus comment to unbreak Sublime code folding
+  # bogus comment to unbreak Sublime code folding
+  # bogus comment to unbreak Sublime code folding
+  # bogus comment to unbreak Sublime code folding
+  # bogus comment to unbreak Sublime code folding
+  # bogus comment to unbreak Sublime code folding
+  # bogus comment to unbreak Sublime code folding
+  # bogus comment to unbreak Sublime code folding
+  # bogus comment to unbreak Sublime code folding
+  # bogus comment to unbreak Sublime code folding
+  # bogus comment to unbreak Sublime code folding
+  # bogus comment to unbreak Sublime code folding
+  # bogus comment to unbreak Sublime code folding
+  # bogus comment to unbreak Sublime code folding
+  # bogus comment to unbreak Sublime code folding
+  # bogus comment to unbreak Sublime code folding
+  # bogus comment to unbreak Sublime code folding
+  # bogus comment to unbreak Sublime code folding
+  # bogus comment to unbreak Sublime code folding
+  # bogus comment to unbreak Sublime code folding
+  # bogus comment to unbreak Sublime code folding
+  # bogus comment to unbreak Sublime code folding
+  # bogus comment to unbreak Sublime code folding
+  # bogus comment to unbreak Sublime code folding
+  # bogus comment to unbreak Sublime code folding
+  # bogus comment to unbreak Sublime code folding
+  # bogus comment to unbreak Sublime code folding
+  # bogus comment to unbreak Sublime code folding
+  # bogus comment to unbreak Sublime code folding
+  # bogus comment to unbreak Sublime code folding
+  # bogus comment to unbreak Sublime code folding
+  # bogus comment to unbreak Sublime code folding
+  # bogus comment to unbreak Sublime code folding
+  # bogus comment to unbreak Sublime code folding
+  # bogus comment to unbreak Sublime code folding
+  # bogus comment to unbreak Sublime code folding
+  # bogus comment to unbreak Sublime code folding
+  # bogus comment to unbreak Sublime code folding
   ('awesome-web-scraping', [
 
     # --- python ---
