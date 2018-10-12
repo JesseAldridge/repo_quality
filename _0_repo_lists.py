@@ -1016,6 +1016,17 @@ repo_lists = collections.OrderedDict([
     'yob/pdf-reader',
     'modesty/pdf2json',
     'mozilla/pdf.js',
+    'gdelugre/origami',
+    'documentcloud/docsplit',
+    'tabulapdf/tabula',
+    'tabulapdf/tabula-java',
+    'rsc/pdf',
+    'yob/pdfreader',
+    'hhrutter/pdfcpu',
+    'ledongthuc/pdf',
+    'unidoc/unidoc',
+    'sajari/docconv',
+    'nisaacson/pdf-text-extract,'
   ]),
   ('programming_languages', [
       'Microsoft/dotnet',
