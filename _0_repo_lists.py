@@ -1001,6 +1001,20 @@ repo_lists = collections.OrderedDict([
       'sequelize/sequelize',
       'devinivy/dogwater'
   ]),
+  ('pdf_parsing', [
+    'euske/pdfminer',
+    'pdfminer/pdfminer.six',
+    'deanmalmgren/textract',
+    'jcushman/pdfquery',
+    'mstamy2/PyPDF2',
+    'kermitt2/grobid',
+    'dbashford/textract',
+    'timClicks/slate',
+    'metachris/pdfx',
+    'pmaupin/pdfrw',
+    'JazzCore/python-pdfkit',
+    'yob/pdf-reader',
+  ]),
   ('programming_languages', [
       'Microsoft/dotnet',
       'apple/swift',
