@@ -1026,7 +1026,11 @@ repo_lists = collections.OrderedDict([
     'ledongthuc/pdf',
     'unidoc/unidoc',
     'sajari/docconv',
-    'nisaacson/pdf-text-extract,'
+    'nisaacson/pdf-text-extract',
+    'archimag/cl-pdf',
+    'dotemacs/pdfboxing',
+    'Yuras/pdf-toolbox',
+    'YoEight/rakhana',
   ]),
   ('programming_languages', [
       'Microsoft/dotnet',
