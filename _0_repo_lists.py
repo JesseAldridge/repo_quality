@@ -1031,6 +1031,7 @@ repo_lists = collections.OrderedDict([
     'dotemacs/pdfboxing',
     'Yuras/pdf-toolbox',
     'YoEight/rakhana',
+    'socialcopsdev/camelot',
   ]),
   ('programming_languages', [
       'Microsoft/dotnet',
