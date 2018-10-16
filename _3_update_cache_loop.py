@@ -6,6 +6,8 @@ debug = False
 
 
 while True:
+  print 'Running, {}'.format(str(datetime.now()))
+
   repo_paths = []
   cache_paths = glob.glob(os.path.join(config.cache_dir_path, '*.txt'))
   if debug:
