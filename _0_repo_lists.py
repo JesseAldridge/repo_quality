@@ -846,6 +846,23 @@ repo_lists = collections.OrderedDict([
       'z0mt3c/hapi-swaggered',
       'z0mt3c/hapi-swaggered-ui',
   ]),
+  ('hidden_markov_models', [
+    'hmmlearn/hmmlearn',
+    'jmschrei/pomegranate',
+    'Sumolari/hmm',
+    'cnatale/JSProbability',
+    'miguelmota/hidden-markov-model',
+    'wiseman/clj-viterbi',
+    'wangkuiyi/hmm',
+    'nyxtom/viterbi',
+    'johnmcconnell/HMM',
+    'unixpickle/hmm',
+    'mazubieta/go-hmm',
+    'mikeizbicki/hmm',
+    'mnacamura/learning-hmm',
+    'AhmedHani/Hidden-Markov-Model',
+    'haifengl/smile',
+  ]),
   ('html_parsing', [
       'paquettg/php-html-parser',
       'lexborisov/myhtml',
@@ -1001,7 +1018,7 @@ repo_lists = collections.OrderedDict([
       'sequelize/sequelize',
       'devinivy/dogwater'
   ]),
-  ('pdf_parsing', [
+  ('pdf_to_text', [
     'euske/pdfminer',
     'pdfminer/pdfminer.six',
     'deanmalmgren/textract',
@@ -1032,6 +1049,11 @@ repo_lists = collections.OrderedDict([
     'Yuras/pdf-toolbox',
     'YoEight/rakhana',
     'socialcopsdev/camelot',
+    'ashima/pdf-table-extract',
+  ]),
+  ('pdf_table_extraction', [
+    'tabulapdf/tabula',
+    'okfn/pdftables',
   ]),
   ('programming_languages', [
       'Microsoft/dotnet',
