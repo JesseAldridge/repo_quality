@@ -1007,6 +1007,18 @@ repo_lists = collections.OrderedDict([
       'avajs/ava',
       'substack/tape',
   ]),
+  ('latex', [
+    'JelteF/PyLaTeX',
+    'mbr/latex',
+    'mathjax/mathjax',
+    'Khan/KaTeX',
+    'manuels/texlive.js',
+    'opencollab/jlatexmath',
+    'jonasseglare/bluebell-latex',
+    'Daniel-Diaz/HaTeX',
+    'gpoore/pythontex',
+    'goldsborough/latexpp',
+  ]),
   ('node_sql', [
       'dresende/node-orm2',
       'tgriesser/bookshelf',
