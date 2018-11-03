@@ -1018,6 +1018,8 @@ repo_lists = collections.OrderedDict([
     'Daniel-Diaz/HaTeX',
     'gpoore/pythontex',
     'goldsborough/latexpp',
+    'apourchet/go-latex',
+    'rwestlund/gotex',
   ]),
   ('node_sql', [
       'dresende/node-orm2',
@@ -1333,11 +1335,15 @@ repo_lists = collections.OrderedDict([
       "pkulchenko/ZeroBranePackage",
       "antirez/redis-io"
   ]),
-  ('wsgi_servers', [
+  ('python_web_servers', [
       'benoitc/gunicorn',
       'Pylons/waitress',
       'cherrypy/cherrypy',
       'unbit/uwsgi',
+      'django/daphne',
+      'encode/uvicorn',
+      'pgjones/quart',
+      'encode/starlette',
   ]),
   ('terminal_ui', [
       'gizak/termui',
