@@ -988,6 +988,14 @@ repo_lists = collections.OrderedDict([
       'davatron5000/FitText.js',
       'isagalaev/highlight.js'
   ]),
+  ('javascript_strings', [
+    'panzerdp/voca',
+    'epeli/underscore.string',
+    'andrewplummer/Sugar',
+    'jashkenas/underscore',
+    'lodash/lodash',
+    'jprichardson/string.js',
+  ]),
   ('javascript_templates', [
       'wycats/handlebars.js',
       'mde/ejs',
