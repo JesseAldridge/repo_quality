@@ -991,6 +991,7 @@ repo_lists = collections.OrderedDict([
   ('javascript_stemming', [
     'MarkKahn/stem',
     'kristopolous/Porter-Stemmer',
+    'kristopolous/Porter2-Stemmer',
     'jedp/porter-stemmer',
     'words/stemmer',
     'fortnightlabs/snowball-js',
