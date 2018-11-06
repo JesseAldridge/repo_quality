@@ -988,6 +988,16 @@ repo_lists = collections.OrderedDict([
       'davatron5000/FitText.js',
       'isagalaev/highlight.js'
   ]),
+  ('javascript_stemming', [
+    'MarkKahn/stem',
+    'kristopolous/Porter-Stemmer',
+    'jedp/porter-stemmer',
+    'words/stemmer',
+    'fortnightlabs/snowball-js',
+    'shibukawa/snowball-stemmer.jsx',
+    'mazko/jssnowball',
+    'hthetiot/node-snowball',
+  ]),
   ('javascript_strings', [
     'panzerdp/voca',
     'epeli/underscore.string',
