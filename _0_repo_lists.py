@@ -707,6 +707,7 @@ repo_lists = collections.OrderedDict([
       'riot/riot',
       'stimulusjs/stimulus',
       'vuejs/vue',
+      'aurelia/framework'
   ]),
   ('filesystem_monitor', [
       'fsnotify/fsnotify',
