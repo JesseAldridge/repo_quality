@@ -1436,6 +1436,10 @@ repo_lists = collections.OrderedDict([
     'spencermountain/compromise',
     'mysamai/natural-brain',
     'NaturalNode/natural',
+    'chartbeat-labs/textacy',
+    'huggingface/neuralcoref',
+    'facebookresearch/fastText',
+    'VowpalWabbit/vowpal_wabbit',
   ]),
   ('node_sql', [
       'dresende/node-orm2',
