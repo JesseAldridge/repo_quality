@@ -557,6 +557,13 @@ repo_lists = collections.OrderedDict([
       'stream-utils/raw-body',
       'visionmedia/consolidate.js/',
   ]),
+  ('data_processing', [
+    'simple-statistics/simple-statistics',
+    'data-forge/data-forge-ts',
+    'uhho/density-clustering',
+    'pandas-dev/pandas',
+    'numpy/numpy',
+  ]),
   ('databases', [
       'google/leveldb',
       'mongodb/mongo',
