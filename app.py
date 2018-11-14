@@ -22,7 +22,7 @@ mean_stars_per_issue = _1_repo_util.get_mean_stars_per_issue()
 @app.route('/')
 def index():
   repo_lists = _0_repo_lists.repo_lists
-  print 'lists:', repo_lists
+  print 'list count:', len(repo_lists)
   return flask.render_template('index.html', repo_lists=repo_lists)
 
 
