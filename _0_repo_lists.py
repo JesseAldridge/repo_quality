@@ -1,4 +1,4 @@
-kimport collections
+import collections
 
 repo_lists = collections.OrderedDict([
   # bogus comment to unbreak Sublime code folding

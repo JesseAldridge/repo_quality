@@ -35,8 +35,9 @@ def pull_paths(paths, auth=config.auth_, ignore_cache=False):
       print 'error reading:', path
       print (u'exception: {}; {}'.format(type(e).__name__, e.message)).encode('utf8')
       traceback.print_exc()
-
-      continue
+    except:
+      print "Unexpected error:", sys.exc_info()[0]
+      raise
 
   # mean_stars_per_issue = (
   #   sum(stars_per_issue_list) / float(len(stars_per_issue_list))
