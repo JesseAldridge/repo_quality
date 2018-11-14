@@ -1342,20 +1342,29 @@ repo_lists = collections.OrderedDict([
     'zygmuntz/wine-quality',
   ]),
   ('natural_language_processing', [
-    'explosion/spaCy',
-    'nltk/nltk',
-    'sloria/textblob',
-    'stanfordnlp/CoreNLP',
-    'RaRe-Technologies/gensim',
     'aboSamoor/polyglot',
+    'chartbeat-labs/textacy',
     'clips/pattern',
-    'spencermountain/compromise',
+    'explosion/spaCy',
+    'facebookresearch/fastText',
+    'huggingface/neuralcoref',
+    'lda-project/lda',
+    'mimno/jsLDA',
     'mysamai/natural-brain',
     'NaturalNode/natural',
-    'chartbeat-labs/textacy',
-    'huggingface/neuralcoref',
-    'facebookresearch/fastText',
+    'nltk/nltk',
+    'primaryobjects/lda',
+    'RaRe-Technologies/gensim',
+    'sloria/textblob',
+    'spencermountain/compromise',
+    'stanfordnlp/CoreNLP',
+    'superscriptjs/superscript',
     'VowpalWabbit/vowpal_wabbit',
+    # https://www.nodebox.net/code/index.php/Linguistics
+    # https://code.google.com/archive/p/jspos/
+    # https://gate.ac.uk/
+    # https://nlp.stanford.edu/software/lex-parser.shtml
+    # http://cogcomp.org/page/software/
   ]),
   ('node_sql', [
       'dresende/node-orm2',
