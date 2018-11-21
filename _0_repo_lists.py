@@ -1406,7 +1406,6 @@ repo_lists = collections.OrderedDict([
     "jdkato/prose",
     "jeremygrace/amazon-reviews",
     "jmartinezheras/2018-MachineLearning-Lectures-ESA",
-    "joewandy/hlda"
     "joewandy/hlda",
     "JoomiK/LDA",
     "joyoyoyoyoyo/emojipasta-topic-modeling"
