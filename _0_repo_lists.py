@@ -954,6 +954,12 @@ repo_lists = collections.OrderedDict([
       'avajs/ava',
       'substack/tape',
   ]),
+  ('language_translation', [
+    'ssut/py-googletrans',
+    'jjangsangy/py-translate',
+    'terryyin/translate-python',
+    # https://cloud.google.com/translate/docs/
+  ]),
   ('latex', [
     'JelteF/PyLaTeX',
     'mbr/latex',
@@ -971,6 +977,7 @@ repo_lists = collections.OrderedDict([
   ('machine_learning', [
     # https://mahout.apache.org/
     # https://www.cs.waikato.ac.nz/ml/weka/
+    'phanein/focused-clustering',
     'aboSamoor/polyglot',
     'airbnb/aerosolve',
     'airbnb/superset',
@@ -1347,6 +1354,7 @@ repo_lists = collections.OrderedDict([
     "AdrienGuille/TOM",
     "ahmedbesbes/How-to-mine-newsfeed-data-and-extract-interactive-insights-in-Python",
     "airbnb/artificial-adversary",
+    "albertyang33/TADW",
     "algorithmica-repository/datascience",
     "allenai/allennlp",
     "ArtificiAI/Multilingual-Latent-Dirichlet-Allocation-LDA",
@@ -1389,6 +1397,7 @@ repo_lists = collections.OrderedDict([
     "EdGENetworks/anuvada",
     "elleros/text-classification-challenge",
     "espnet/espnet",
+    "etali/emf",
     "evan-l-munson/saotd",
     "explosion/spaCy",
     "facebookresearch/fairseq-py",
@@ -1399,6 +1408,7 @@ repo_lists = collections.OrderedDict([
     "facebookresearch/MUSE",
     "facebookresearch/pythia",
     "facebookresearch/UnsupervisedMT",
+    "fei3189/word2vec",
     "GauravBh1010tt/DL-text",
     "giacbrd/ShallowLearn",
     "google-research/bert",
@@ -1434,6 +1444,8 @@ repo_lists = collections.OrderedDict([
     "kk7nc/RMDL",
     "konlpy/konlpy",
     "languagetool-org/languagetool",
+    "largelymfs/paragraph2vec",
+    "largelymfs/topical_word_embeddings",
     "lda-project/lda",
     "lejon/PartiallyCollapsedLDA",
     "lettier/lda-topic-modeling",
@@ -1445,6 +1457,7 @@ repo_lists = collections.OrderedDict([
     "manuelbickel/textility",
     "mattilyra/pydataberlin-2017",
     "mayuresh1016/MATLAB-Machine-Learning",
+    "mfaruqui/non-distributional",
     "mila-udem/babyai",
     "mimno/jsLDA",
     "minven/nlp-lt",
