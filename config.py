@@ -2,7 +2,7 @@ import os
 
 from requests import auth
 
-from stuff import secrets
+import secrets
 
 cache_dir_path = os.path.expanduser('~/.github_quality')
 use_auth = True

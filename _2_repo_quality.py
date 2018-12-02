@@ -2,7 +2,6 @@ import json, os, re, getpass, glob, time, datetime, traceback
 
 import requests, arrow, flask
 
-from stuff import secrets
 import config, _1_repo_util, _0_hit_api
 
 if not os.path.exists(config.cache_dir_path):
@@ -18,8 +17,7 @@ def pull_paths(paths, auth=config.auth_, ignore_cache=False):
   stars_per_issue_list = []
   for path in paths:
     try:
-      repo_dict = pull_repo(
-        path, mean_stars_per_issue, auth=auth, ignore_cache=ignore_cache)
+      repo_dict = pull_repo(path, mean_stars_per_issue, auth=auth, ignore_cache=ignore_cache)
       if min_score is None or repo_dict['score'] < min_score:
         min_score = repo_dict['score']
       if max_score is None or repo_dict['score'] > max_score:
@@ -38,16 +36,6 @@ def pull_paths(paths, auth=config.auth_, ignore_cache=False):
     except:
       print "Unexpected error:", sys.exc_info()[0]
       raise
-
-  # mean_stars_per_issue = (
-  #   sum(stars_per_issue_list) / float(len(stars_per_issue_list))
-  #   if stars_per_issue_list else config.default_stars_per_issue)
-  # requests.patch(
-  #   'https://repo-quality.firebaseio.com/.json?auth=' + secrets.firebase_token,
-  #   data=json.dumps({
-  #     'mean_stars_per_issue': mean_stars_per_issue,
-  #     'min_score': min_score, 'max_score': max_score
-  #   }))
 
   for repo_dict in sorted(repo_dicts, key=lambda d: -d['score']):
     print '        path:', repo_dict['path']
@@ -77,7 +65,7 @@ class SearchAPI:
     return self.rate_limit is None or self.rate_limit > 0 or time.time() > self.reset_time
 
 search_api = SearchAPI()
-def pull_repo(repo_path, mean_stars_per_issue, auth=None, ignore_cache=False):
+def pull_repo(repo_path, mean_stars_per_issue, auth=None, ignore_cache=True):
   _1_repo_util.validate_path(repo_path)
   cache_file_path = os.path.join(config.cache_dir_path, repo_path.replace('/', '_') + '.txt')
   if not os.path.exists(cache_file_path) or ignore_cache:
@@ -88,7 +76,9 @@ def pull_repo(repo_path, mean_stars_per_issue, auth=None, ignore_cache=False):
     primary_author = None
     if commits:
       author_to_count = {}
-      for commit in commits:
+      for i, commit in enumerate(commits):
+        if not commit['author']:
+          continue
         author = commit['author']['login']
         author_to_count.setdefault(author, 0)
         author_to_count[author] += 1
@@ -102,7 +92,7 @@ def pull_repo(repo_path, mean_stars_per_issue, auth=None, ignore_cache=False):
     for issue in issues:
       if "pull_request" in issue:
         continue
-      if issues['user']['login'] == primary_author
+      if issue['user']['login'] == primary_author:
         self_issue_count += 1
     repo_dict['self_issue_count'] = self_issue_count
 
