@@ -34,7 +34,11 @@ def get_repo(repo_path):
       'stargazers_count', 'age', 'closed_issues', 'timestamp_to_score')
       if k in repo_dict
   }
-  whitelisted_dict['issue_count'] = repo_dict['open_issues'] - repo_dict.get('pull_count', 0)
+  whitelisted_dict['issue_count'] = (
+    repo_dict['open_issues'] -
+    repo_dict.get('pull_count', 0) -
+    repo_dict.get('self_issue_count', 0)
+  )
 
   return whitelisted_dict
 

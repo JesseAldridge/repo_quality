@@ -28,6 +28,7 @@ fake_repo_dict = {
   'open_issues_count': 10,
   'age': datetime.timedelta(days=100),
   'pull_count': 2,
+  'self_issue_count': 3
 }
 
 missing_pull_count = {

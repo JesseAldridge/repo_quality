@@ -83,8 +83,29 @@ def pull_repo(repo_path, mean_stars_per_issue, auth=None, ignore_cache=False):
   if not os.path.exists(cache_file_path) or ignore_cache:
     print 'pulling info:', cache_file_path
     repo_dict = json.loads(_0_hit_api.hit_api(repo_path, auth))
+
+    commits = json.loads(_0_hit_api.hit_api(repo_path, auth, '/commits'))
+    primary_author = None
+    if commits:
+      author_to_count = {}
+      for commit in commits:
+        author = commit['author']['login']
+        author_to_count.setdefault(author, 0)
+        author_to_count[author] += 1
+      primary_author = max(author_to_count.items(), key=lambda t: t[1])
+
     pulls = json.loads(_0_hit_api.hit_api(repo_path, auth, '/pulls'))
     repo_dict['pull_count'] = len(pulls)
+
+    issues = json.loads(_0_hit_api.hit_api(repo_path, auth, '/issues'))
+    self_issue_count = 0
+    for issue in issues:
+      if "pull_request" in issue:
+        continue
+      if issues['user']['login'] == primary_author
+        self_issue_count += 1
+    repo_dict['self_issue_count'] = self_issue_count
+
     _1_repo_util.write_repo(repo_dict, mean_stars_per_issue, repo_path)
 
   with open(cache_file_path) as f:
