@@ -29,6 +29,8 @@ def pull_paths(paths, auth=config.auth_, ignore_cache=False):
       if not repo_dict:
         print 'null repo:', path, repo_dict
       repo_dicts.append(repo_dict)
+      repo_dicts.sort(key=lambda d: d['score'])
+      repo_dicts = repo_dicts[:100]
     except Exception as e:
       print 'error reading:', path
       print (u'exception: {}; {}'.format(type(e).__name__, e.message)).encode('utf8')
