@@ -84,7 +84,7 @@ def pull_repo(repo_path, mean_stars_per_issue, auth=None, ignore_cache=False):
         author = commit['author']['login']
         author_to_count.setdefault(author, 0)
         author_to_count[author] += 1
-      primary_author = max(author_to_count.items(), key=lambda t: t[1])
+      primary_author = max(author_to_count.items(), key=lambda t: t[1])[0]
 
     pulls = json.loads(_0_hit_api.hit_api(repo_path, auth, '/pulls'))
     repo_dict['pull_count'] = len(pulls)
