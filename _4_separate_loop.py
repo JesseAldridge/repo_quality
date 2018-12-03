@@ -2,7 +2,7 @@ import subprocess, time
 
 debug = 0
 while True:
-  subprocess.Popen(['python', '_3_update_cache_loop.py', str(debug)])
+  subprocess.Popen(['python', '_3_update_cache_loop.py', str(debug)]).communicate()
 
   if debug:
     time.sleep(1)
