@@ -13,7 +13,7 @@ cache_paths = glob.glob(os.path.join(config.cache_dir_path, '*.txt'))
 # cache_paths = glob.glob(os.path.join(config.cache_dir_path, 'hapijs_hapi.txt'))
 if debug:
   cache_paths = cache_paths[:3]
-for cache_file_path in sorted(cache_paths):
+for cache_file_path in sorted(cache_paths, key=lambda path: path.lower()):
   with open(cache_file_path) as f:
     try:
       repo_dict = json.loads(f.read())
