@@ -30,4 +30,4 @@ def hit_api(repo_path, auth, suffix=''):
     raise FailedSeveralTimes()
 
 if __name__ == '__main__':
-  print hit_api('gergoerdosi/nesive-hapi-cloudinary-connector', None)
+  print hit_api('hapijs/hapi', None)
