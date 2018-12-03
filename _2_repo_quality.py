@@ -67,7 +67,7 @@ class SearchAPI:
     return self.rate_limit is None or self.rate_limit > 0 or time.time() > self.reset_time
 
 search_api = SearchAPI()
-def pull_repo(repo_path, mean_stars_per_issue, auth=None, ignore_cache=True):
+def pull_repo(repo_path, mean_stars_per_issue, auth=None, ignore_cache=False):
   _1_repo_util.validate_path(repo_path)
   cache_file_path = os.path.join(config.cache_dir_path, repo_path.replace('/', '_') + '.txt')
   if not os.path.exists(cache_file_path) or ignore_cache:
