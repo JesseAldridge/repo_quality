@@ -1977,6 +1977,8 @@ repo_lists = collections.OrderedDict([
       'linnovate/mean',
       'MasoniteFramework/masonite',
       'meteor/meteor',
+      'lukeed/polka',
+      'nestjs/nest',
       'mitsuhiko/flask',
       'ninjaframework/ninja',
       'nodejs/node',
