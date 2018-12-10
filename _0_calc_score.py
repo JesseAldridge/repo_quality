@@ -2,7 +2,7 @@ import datetime
 
 hardcoded_issue_counts = {
   # https://code.djangoproject.com/query
-  'django/django': 1243,
+  'django/django': 1424,
 
   # Laravel has no ticketing system?
   # Use core framework as proxy, assuming stars proportional to issues
