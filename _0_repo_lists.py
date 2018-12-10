@@ -2099,6 +2099,8 @@ repo_lists = collections.OrderedDict([
       'reggoodwin/ferrit',
   ]),
   ('web_frameworks', [
+      'aspnet/AspNetCore',
+      'aspnet/Blazor',
       'balderdashy/sails',
       'cakephp/cakephp',
       'derbyjs/derby',
@@ -2113,6 +2115,7 @@ repo_lists = collections.OrderedDict([
       'linnovate/mean',
       'MasoniteFramework/masonite',
       'meteor/meteor',
+      'NancyFx/Nancy',
       'lukeed/polka',
       'nestjs/nest',
       'eggjs/egg',
