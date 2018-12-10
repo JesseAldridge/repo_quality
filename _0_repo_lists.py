@@ -48,6 +48,13 @@ repo_lists = collections.OrderedDict([
   # bogus comment to unbreak Sublime code folding
   # bogus comment to unbreak Sublime code folding
   # bogus comment to unbreak Sublime code folding
+  ('authentication', [
+    'jaredhanson/passport',
+    'plataformatec/devise',
+    'bnoguchi/everyauth',
+    # https://medium.freecodecamp.org/learn-how-to-handle-authentication-with-node-using-passport-js-4a56ed18e81e
+
+  ]),
   ('awesome-web-scraping', [
 
     # --- python ---
