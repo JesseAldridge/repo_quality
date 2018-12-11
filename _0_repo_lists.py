@@ -670,7 +670,7 @@ for path in glob.glob('lists/*.txt'):
   raw_repo_lists.append((list_name, clean_lines))
 
 repo_lists = collections.OrderedDict()
-for name, repo_list in raw_repo_lists:
+for name, repo_list in sorted(raw_repo_lists, key=lambda t: t[0]):
   repo_lists[name] = repo_list
 
 if __name__ == '__main__':
