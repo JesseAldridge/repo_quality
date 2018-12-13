@@ -1,0 +1,8 @@
+daffl/jquery.dform
+gitana/alpaca
+jdorn/json-editor
+json-schema-form/angular-schema-form
+jsonform/jsonform
+metawidget/metawidget
+mozilla-services/react-jsonschema-form
+neyric/wireit
