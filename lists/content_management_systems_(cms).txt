@@ -5,7 +5,6 @@ apiqcms/kms
 apostrophecms/apostrophe
 arterli/CmsWing
 AsgardCms/Platform
-Awesome-CMS-Core/Awesome-CMS-Core
 backdrop/backdrop
 bolt/bolt
 BootstrapCMS/CMS
@@ -26,7 +25,6 @@ divio/django-filer
 dnnsoftware/Dnn.Platform
 doramart/DoraCMS
 dotCMS/core
-drmonkeyninja/awesome-textpattern
 drupal/drupal
 etewiah/property_web_builder
 feincms/feincms
@@ -49,16 +47,12 @@ keystonejs/keystone
 Kotti/Kotti
 Kunstmaan/KunstmaanBundlesCMS
 LavaLite/cms
-leekelleher/awesome-umbraco
 lektor/lektor
 locomotivecms/engine
 Lucifer1993/AngelSword
 magento/magento2
 microweber/microweber
-mishbahr/awesome-django-cms
-miziomon/awesome-wordpress
 modxcms/revolution
-mrsinguyen/awesome-drupal
 netlify/netlify-cms
 notadd/notadd
 octobercms/october
@@ -78,7 +72,6 @@ Platformus/Platformus
 plone/Plone
 ponzu-cms/ponzu
 ponzucs/ponzu
-postlight/awesome-cms
 PrestaShop/PrestaShop
 processwire/processwire
 prose/prose
@@ -92,7 +85,6 @@ reactioncommerce/reaction
 redaxmedia/redaxscript
 redaxo/redaxo
 refinery/refinerycms
-refinerycms-contrib/awesome-refinerycms
 relax/relax
 roadiz/roadiz
 rochacbruno/quokka
@@ -100,13 +92,11 @@ sanityi/sanity
 SeriaWei/ZKEACMS.Core
 shen100/golang123
 silverstripe/silverstripe-framework
-sindresorhus/awesome
 site/privacy
 site/terms
 siteserver/cms
 spatie/blender
 SpinaCMS/Spina
-springload/awesome-wagtail
 stephenmcd/mezzanine
 strapi/strapi
 sulu/sulu-standard
@@ -114,10 +104,8 @@ textpattern/textpattern
 thechangelog/changelog.com
 thelia/thelia
 thomas4019/expressa
-tipeio/tipe
 torchbox/wagtail
 TryGhost/Ghost
-tryghost/Ghost
 TypiCMS/Base
 TYPO3/TYPO3.CMS
 umbraco/Umbraco-CMS
@@ -125,7 +113,6 @@ unite-cms/unite-cms
 vapid/vapid
 wagtail/wagtail
 webhook/webhook
-websemantics/awesome-pyrocms
 wejs/we
 welkinwong/nodercms
 wikimedia/mediawiki
