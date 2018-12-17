@@ -42,6 +42,7 @@ gma/nesta
 gohugoio/hugo
 jcoppieters/cody
 jekyll/jekyll-admin
+JesseAldridge/winter-cms
 joomla/joomla-cms
 ketchuphq/ketchup
 keystonejs/keystone
