@@ -1,0 +1,4 @@
+dbcli/mycli
+dbeaver/dbeaver
+sequelpro/sequelpro
+phpmyadmin/phpmyadmin
