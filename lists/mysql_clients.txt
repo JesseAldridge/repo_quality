@@ -2,3 +2,4 @@ dbcli/mycli
 dbeaver/dbeaver
 sequelpro/sequelpro
 phpmyadmin/phpmyadmin
+# https://www.quora.com/What-is-the-best-MySQL-client-for-Mac-OS-X-or-Windows
