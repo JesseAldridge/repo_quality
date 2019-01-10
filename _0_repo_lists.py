@@ -66,7 +66,8 @@ raw_repo_lists = [
       'riot/riot',
       'stimulusjs/stimulus',
       'vuejs/vue',
-      'aurelia/framework'
+      'aurelia/framework',
+      'mobxjs/mobx/',
   ]),
   ('filesystem_monitor', [
       'fsnotify/fsnotify',
