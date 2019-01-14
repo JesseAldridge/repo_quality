@@ -5,6 +5,12 @@ raw_repo_lists = [
     'jaredhanson/passport',
     'plataformatec/devise',
     'bnoguchi/everyauth',
+    'oauthjs/node-oauth2-server',
+    'lelylan/simple-oauth2',
+    'auth0/node-jsonwebtoken',
+    'Spyna/protect-rest-api-after-social-login',
+    '26medias/social-login',
+    # WordPress has a plugin
   ]),
   ('data_processing', [
     'simple-statistics/simple-statistics',
