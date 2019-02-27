@@ -28,11 +28,9 @@ apexcharts/apexcharts.js
 bendc/animateplus
 primer/octicons
 plouc/nivo
-alrra/browser-logos
 Bogdan-Lyashenko/js-code-to-svg-flowchart
 evil-icons/evil-icons
 jsplumb/jsplumb
-cncf/landscape
 tsayen/dom-to-image
 smooth-code/svgr
 gilbarbara/logos

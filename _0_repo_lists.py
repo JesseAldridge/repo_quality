@@ -614,6 +614,7 @@ raw_repo_lists = [
       'go-martini/martini',
       'hanami/hanami',
       'hapijs/hapi',
+      'remoteinterview/zero',
       'keithwhor/nodal',
       'koajs/koa',
       'kraih/mojo',
