@@ -2,3 +2,6 @@ autopilot-rs/autopilot-rs
 autopilot-rs/autopy
 autopilot-rs/autopy-legacy
 AXElements/mouse
+asweigart/pyautogui
+boppreh/keyboard
+boppreh/mouse
