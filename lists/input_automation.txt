@@ -1,2 +1,4 @@
 autopilot-rs/autopilot-rs
+autopilot-rs/autopy
+autopilot-rs/autopy-legacy
 AXElements/mouse
