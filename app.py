@@ -63,6 +63,7 @@ def send_js(path):
 @app.route('/<username>/<repo_name>')
 @app.route('/<username>/<repo_name>/')
 def query_repo(username, repo_name):
+  print(datetime.now().isoformat(), 'query_repo:', username, repo_name)
   repo_dict = get_repo('/'.join((username, repo_name)))
   repo_json = DateTimeEncoder().encode(repo_dict)
   return flask.render_template('repo.html', repo_json=repo_json)
@@ -70,6 +71,7 @@ def query_repo(username, repo_name):
 
 @app.route('/lists/<list_name>')
 def query_list(list_name):
+  print(datetime.now().isoformat(), 'query_list:', list_name)
   repo_lists = _0_repo_lists.repo_lists
   paths = repo_lists[list_name] if list_name in repo_lists else None
   if paths:
