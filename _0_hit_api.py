@@ -16,9 +16,7 @@ def log(*a):
 def hit_api(repo_path, auth, suffix='', priority_request=False):
   main_resp = requests.get('https://api.github.com/repos/{}{}'.format(repo_path, suffix), auth=auth)
   for _ in range(10):
-    if int(main_resp.headers['x-ratelimit-remaining']) < 1000 and not priority_request:
-      log('ratelimit running out, sleeping for 10 seconds, reset_time:', reset_time)
-    elif main_resp.status_code == 403:
+    if main_resp.status_code == 403:
       reset_time = main_resp.headers['X-RateLimit-Reset']
       log('rate limit exceeded, sleeping for 120 seconds, reset_time:', reset_time)
       time.sleep(120)
