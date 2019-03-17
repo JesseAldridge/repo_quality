@@ -70,11 +70,15 @@ search_api = SearchAPI()
 def pull_repo(repo_path, mean_stars_per_issue, auth=None, ignore_cache=False):
   _1_repo_util.validate_path(repo_path)
   cache_file_path = os.path.join(config.cache_dir_path, repo_path.replace('/', '_') + '.txt')
+
+  def hit_api(repo_path, auth, suffix=''):
+    return _0_hit_api.hit_api(repo_path, auth, suffix, priority_request=not ignore_cache)
+
   if not os.path.exists(cache_file_path) or ignore_cache:
     print 'pulling info:', cache_file_path
-    repo_dict = json.loads(_0_hit_api.hit_api(repo_path, auth))
+    repo_dict = json.loads(hit_api(repo_path, auth))
 
-    commits = json.loads(_0_hit_api.hit_api(repo_path, auth, '/commits'))
+    commits = json.loads(hit_api(repo_path, auth, '/commits'))
     primary_author = None
     if commits:
       author_to_count = {}
@@ -86,10 +90,10 @@ def pull_repo(repo_path, mean_stars_per_issue, auth=None, ignore_cache=False):
         author_to_count[author] += 1
       primary_author = max(author_to_count.items(), key=lambda t: t[1])[0]
 
-    pulls = json.loads(_0_hit_api.hit_api(repo_path, auth, '/pulls'))
+    pulls = json.loads(hit_api(repo_path, auth, '/pulls'))
     repo_dict['pull_count'] = len(pulls)
 
-    issues = json.loads(_0_hit_api.hit_api(repo_path, auth, '/issues'))
+    issues = json.loads(hit_api(repo_path, auth, '/issues'))
     self_issue_count = 0
     for issue in issues:
       if "pull_request" in issue:
