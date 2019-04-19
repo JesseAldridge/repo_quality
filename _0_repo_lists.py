@@ -502,6 +502,7 @@ raw_repo_lists = [
   ]),
   ('terminal_ui', [
       'gizak/termui',
+      'oclif/oclif',
       'mabe02/lanterna',
       'jroimartin/gocui',
       'VladimirMarkelov/clui',
