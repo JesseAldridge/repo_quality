@@ -95,11 +95,6 @@ raw_repo_lists = [
       'beheadedmyway/gity',
       'andreberg/gitx'
   ]),
-  ('graphing', [
-    'd3/d3',
-    'chartjs/Chart.js',
-    'flot/flot',
-  ]),
   ('hidden_markov_models', [
     'hmmlearn/hmmlearn',
     'jmschrei/pomegranate',

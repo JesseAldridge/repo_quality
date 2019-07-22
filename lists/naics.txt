@@ -3,3 +3,5 @@ hernamesbarbara/NAICS
 cyriac/ic-codes
 lovehandle/naics-2012
 gemsbyed/naics_search
+daguar/naics-scraper
+dobtco/NAICS
