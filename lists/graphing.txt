@@ -1,0 +1,6 @@
+d3/d3
+chartjs/Chart.js
+flot/flot
+novus/nvd3
+PMSI-AlignAlytics/dimple
+dc-js/dc.js
