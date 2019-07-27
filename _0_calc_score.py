@@ -10,6 +10,9 @@ hardcoded_issue_counts = {
   'laravel/laravel': 218,
 }
 
+# basically:
+# stars * .01 + stars / days * 2 + stars / (non_self_issue_count) * 20
+
 def calc_score(repo_dict, mean_stars_per_issue):
   repo_dict['score'] = repo_dict['stargazers_count'] * .01
   repo_dict['score'] += repo_dict['stargazers_count'] / (repo_dict['age'].days or 1) * 2
