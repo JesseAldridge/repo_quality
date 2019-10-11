@@ -54,3 +54,5 @@ yob/pdfreader
 YoEight/rakhana
 Yuras/pdf-toolbox
 zhoubear/open-paperless
+johnwhitington/cpdf-source
+johnwhitington/camlpdf
