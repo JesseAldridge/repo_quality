@@ -220,7 +220,7 @@ andreasvirkus/metalsmith-boilerplate
 segmentio/metalsmith-drafts
 middleman/middleman
 wallin/middleman-template
-sstephenson/sprockets
+rails/sprockets
 mimoduo/mimogear
 neevek/minerl
 ijmccallum/msg-starter
