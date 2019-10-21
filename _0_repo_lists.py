@@ -1,33 +1,6 @@
 import collections, glob, json, os, re
 
 raw_repo_lists = [
-  ('authentication', [
-    'jaredhanson/passport',
-    'plataformatec/devise',
-    'bnoguchi/everyauth',
-    'oauthjs/node-oauth2-server',
-    'lelylan/simple-oauth2',
-    'auth0/node-jsonwebtoken',
-    'Spyna/protect-rest-api-after-social-login',
-    '26medias/social-login',
-    # WordPress has a plugin
-  ]),
-  ('data_processing', [
-    'simple-statistics/simple-statistics',
-    'data-forge/data-forge-ts',
-    'uhho/density-clustering',
-    'pandas-dev/pandas',
-    'numpy/numpy',
-  ]),
-  ('databases', [
-      'google/leveldb',
-      'mongodb/mongo',
-      'neo4j/neo4j',
-      'antirez/redis',
-      'rethinkdb/rethinkdb',
-      'pouchdb/pouchdb',
-      'thinkaurelius/titan',
-  ]),
   ('deep_learning', [
       'tensorflow/tensorflow',
       'fchollet/keras',

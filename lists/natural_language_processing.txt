@@ -176,6 +176,7 @@ yangliuy/LDAGibbsSampling
 yao8839836/KGE-LDA
 zhaoyingjun/chatbot
 ZilongTan/ptpq
+fastai/fastai
 
 // https://www.nodebox.net/code/index.php/Linguistics
 // https://code.google.com/archive/p/jspos/

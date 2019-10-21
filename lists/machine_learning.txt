@@ -370,3 +370,4 @@ zygmuntz/kaggle-gender
 zygmuntz/kaggle-merck
 zygmuntz/kaggle-stackoverflow
 zygmuntz/wine-quality
+fastai/fastai
