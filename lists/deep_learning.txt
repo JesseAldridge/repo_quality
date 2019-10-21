@@ -1,0 +1,15 @@
+tensorflow/tensorflow
+fchollet/keras
+BVLC/caffe
+dmlc/mxnet
+Theano/Theano
+Microsoft/CNTK
+deeplearning4j/deeplearning4j
+baidu/paddle
+pytorch/pytorch
+pfnet/chainer
+torch/torch7
+NVIDIA/DIGITS
+tflearn/tflearn
+caffe2/caffe2
+davisking/dlib

@@ -1,34 +1,6 @@
 import collections, glob, json, os, re
 
 raw_repo_lists = [
-  ('deep_learning', [
-      'tensorflow/tensorflow',
-      'fchollet/keras',
-      'BVLC/caffe',
-      'dmlc/mxnet',
-      'Theano/Theano',
-      'Microsoft/CNTK',
-      'deeplearning4j/deeplearning4j',
-      'baidu/paddle',
-      'pytorch/pytorch',
-      'pfnet/chainer',
-      'torch/torch7',
-      'NVIDIA/DIGITS',
-      'tflearn/tflearn',
-      'caffe2/caffe2',
-      'davisking/dlib',
-  ]),
-  ('excel_parsing', [
-    # https://bitbucket.org/openpyxl/openpyxl
-    'jmcnamara/XlsxWriter',
-    'python-excel/xlrd',
-    'python-excel/xlwt',
-    'python-excel/xlutils',
-    'kz26/PyExcelerate',
-    'sheetjs/js-xlsx',
-    'tealeg/xlsx',
-    '360EntSecGroup-Skylar/excelize',
-  ]),
   ('filesystem_monitor', [
       'fsnotify/fsnotify',
       'radovskyb/watcher',
