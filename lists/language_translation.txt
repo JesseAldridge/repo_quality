@@ -1,0 +1,4 @@
+ssut/py-googletrans
+jjangsangy/py-translate
+terryyin/translate-python
+// https://cloud.google.com/translate/docs/

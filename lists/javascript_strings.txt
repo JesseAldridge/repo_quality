@@ -1,0 +1,6 @@
+panzerdp/voca
+epeli/underscore.string
+andrewplummer/Sugar
+jashkenas/underscore
+lodash/lodash
+jprichardson/string.js

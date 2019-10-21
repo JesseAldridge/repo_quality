@@ -1,0 +1,6 @@
+      'pieter/gitx',
+      'rowanj/gitx',
+      'brotherbard/gitx',
+      'laullon/gitx',
+      'beheadedmyway/gity',
+      'andreberg/gitx'

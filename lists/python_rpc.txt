@@ -1,0 +1,10 @@
+shibukawa/curl_as_dsl
+irmen/Pyro4
+tomerfiliba/rpyc
+arskom/spyne
+python-symmetric-jsonrpc
+dwb/jsonrpc2-zeromq-python
+kiorky/SOAPpy
+wamp-proto/wamp-proto
+geoffwatts/zmqrpc
+0rpc/zerorpc-python

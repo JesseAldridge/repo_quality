@@ -1,0 +1,12 @@
+JelteF/PyLaTeX
+mbr/latex
+mathjax/mathjax
+Khan/KaTeX
+manuels/texlive.js
+opencollab/jlatexmath
+jonasseglare/bluebell-latex
+Daniel-Diaz/HaTeX
+gpoore/pythontex
+goldsborough/latexpp
+apourchet/go-latex
+rwestlund/gotex

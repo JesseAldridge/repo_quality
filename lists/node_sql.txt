@@ -1,0 +1,9 @@
+dresende/node-orm2
+tgriesser/bookshelf
+felixge/node-mysql
+1602/jugglingdb
+brianc/node-postgres
+tgriesser/knex
+balderdashy/waterline
+sequelize/sequelize
+devinivy/dogwater

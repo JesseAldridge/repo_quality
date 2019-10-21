@@ -1,0 +1,10 @@
+paquettg/php-html-parser
+lexborisov/myhtml
+ericchiang/pup
+developit/htmlParser
+posthtml/posthtml-parser
+philss/floki
+jquery/jquery/issues/2941
+ressio/pharse
+cheeriojs/cheerio
+google/gumbo-parser

@@ -1,0 +1,10 @@
+fsnotify/fsnotify
+radovskyb/watcher
+howeyc/fsnotify
+gorakhargosh/watchdog
+ljmccarthy/fsmonitor
+guard/guard
+seb-m/pyinotify
+rvoicilas/inotify-tools
+jbd/treewatcher
+pke/file.monitor
