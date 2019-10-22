@@ -359,7 +359,6 @@ sindresorhus/awesome
 dropbox/lepton
 tensorflow/tensorflow
 hyperopt/hyperopt
-yangshun/tech-interview-handbook
 sdispater/poetry
 actix/actix
 cdr/code-server
