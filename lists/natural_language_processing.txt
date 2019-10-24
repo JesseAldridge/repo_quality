@@ -346,7 +346,6 @@ tensorflow/nmt
 ibab/tensorflow-wavenet
 vinta/awesome-python
 nvbn/thefuck
-yifeikong/reverse-interview-zh
 ddbourgin/numpy-ml
 peterq/pan-light
 google/diff-match-patch
