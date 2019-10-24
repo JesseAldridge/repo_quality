@@ -355,7 +355,6 @@ openai/sparse_attention
 spotify/annoy
 openai/gpt-2
 facebook/prophet
-sindresorhus/awesome
 dropbox/lepton
 tensorflow/tensorflow
 hyperopt/hyperopt
