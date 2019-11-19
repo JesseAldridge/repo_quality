@@ -24,3 +24,4 @@ summernote/summernote
 surmon-china/vue-codemirror
 tinymce/tinymce
 yabwe/medium-editor
+JedWatson/react-codemirror
