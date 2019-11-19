@@ -20,7 +20,6 @@ diana-hep/adage
 druths/flex
 Ensembl/ensembl-hive
 evoldoers/biomake
-Factual/drake
 factual/drake
 fission/fission-workflows
 fstrozzi/bioruby-pipengine

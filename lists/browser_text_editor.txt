@@ -1,0 +1,8 @@
+codemirror/CodeMirror
+ajaxorg/ace
+FirebaseExtended/firepad
+conclave-team/conclave
+Graphite-Docs/graphite
+facebook-atom/atom-in-orbit
+Microsoft/monaco-editor
+spiffcode/ghedit

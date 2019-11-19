@@ -3,3 +3,4 @@ data-forge/data-forge-ts
 uhho/density-clustering
 pandas-dev/pandas
 numpy/numpy
+blaze/blaze
