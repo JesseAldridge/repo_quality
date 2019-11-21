@@ -16,3 +16,10 @@ vuejs/vue
 aurelia/framework
 mobxjs/mobx
 sveltejs/svelte
+vuejs/vuex
+davidkpiano/xstate
+ngrx/platform
+final-form/react-final-form
+mobxjs/mobx-state-tree
+ctrlplusb/easy-peasy
+apollographql/apollo-client

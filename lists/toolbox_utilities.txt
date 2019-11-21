@@ -1,0 +1,3 @@
+pytoolz/toolz
+jashkenas/underscore
+lodash/lodash
