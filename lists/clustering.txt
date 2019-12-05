@@ -2,3 +2,8 @@ elki-project/elki
 biolab/orange3
 scipy/scipy
 scikit-learn
+BinRoot/TensorFlow-Book
+hazelcast/hazelcast
+Leaflet/Leaflet.markercluster
+eriklindernoren/ML-From-Scratch
+rasbt/python-machine-learning-book
