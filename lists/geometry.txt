@@ -1,0 +1,8 @@
+HarryStevens/geometric
+alexbol99/flatten-js
+paperjs/paper.js
+GeometryCollective/geometry-processing-js
+jnordberg/geometry.js
+radify/geometry.js
+openlayers/openlayers
+bjornharrtell/jsts
