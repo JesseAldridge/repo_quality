@@ -1,10 +1,13 @@
 elki-project/elki
 biolab/orange3
 scipy/scipy
-scikit-learn
+scikit-learn/scikit-learn
 BinRoot/TensorFlow-Book
 hazelcast/hazelcast
 Leaflet/Leaflet.markercluster
 eriklindernoren/ML-From-Scratch
 rasbt/python-machine-learning-book
 rasbt/python-machine-learning-book-2nd-edition
+matplotlib/matplotlib
+numpy/numpy
+pandas-dev/pandas
