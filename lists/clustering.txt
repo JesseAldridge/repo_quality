@@ -7,3 +7,4 @@ hazelcast/hazelcast
 Leaflet/Leaflet.markercluster
 eriklindernoren/ML-From-Scratch
 rasbt/python-machine-learning-book
+rasbt/python-machine-learning-book-2nd-edition
