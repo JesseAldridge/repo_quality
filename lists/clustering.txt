@@ -11,3 +11,4 @@ rasbt/python-machine-learning-book-2nd-edition
 matplotlib/matplotlib
 numpy/numpy
 pandas-dev/pandas
+nmslib/nmslib
