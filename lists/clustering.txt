@@ -12,3 +12,7 @@ matplotlib/matplotlib
 numpy/numpy
 pandas-dev/pandas
 nmslib/nmslib
+simple-statistics/simple-statistics
+data-forge/data-forge-ts
+plotly/plotly.py
+plotly/plotly.js
