@@ -5,7 +5,7 @@ import _0_hit_api
 if os.path.exists('test_pulls.json'):
   os.remove('test_pulls.json')
 
-for page in range(1, 20):
+for page in range(1, 100):
   print 'page:', page
   page_str = _0_hit_api.hit_api(
     'angular/angular', 

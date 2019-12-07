@@ -90,7 +90,18 @@ def pull_repo(repo_path, mean_stars_per_issue, auth=None, ignore_cache=False):
         author_to_count[author] += 1
       primary_author = max(author_to_count.items(), key=lambda t: t[1])[0]
 
-    pulls = json.loads(hit_api(repo_path, auth, '/pulls'))
+    pulls = []
+    for page in range(1, 100):
+      page_str = _0_hit_api.hit_api(
+        repo_path,
+        auth,
+        '/pulls?page={}'.format(page),
+      )
+      page_list = json.loads(page_str)
+      if not page_list:
+        break
+      pulls += page_list
+
     repo_dict['pull_count'] = len(pulls)
 
     issues = json.loads(hit_api(repo_path, auth, '/issues'))
