@@ -97,3 +97,6 @@ symfony/dom-crawler
 tatey/conformist
 tmaciejewski/see
 uilian/Seinfeld_Videos
+facert/awesome-spider
+gocolly/colly
+jhao104/proxy_pool
