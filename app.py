@@ -27,7 +27,9 @@ def index():
 
 
 def get_repo(repo_path):
-  repo_dict = _2_repo_quality.pull_repo(repo_path, mean_stars_per_issue, auth=config.auth_)
+  repo_dict = _2_repo_quality.pull_repo(
+    repo_path, mean_stars_per_issue, priority=True, auth=config.auth_
+  )
   whitelisted_dict = {
     k: repo_dict[k] for k in (
       'full_name', 'score', 'has_issues', 'rating_str', 'explanation',
