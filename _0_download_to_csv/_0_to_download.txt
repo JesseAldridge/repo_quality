@@ -1,0 +1,17 @@
+twbs/bootstrap
+kennethreitz/requests
+jasmine/jasmine
+rails/rails
+angular/angular.js
+tax/python-requests-aws
+django/django
+mitsuhiko/flask
+npm/npm
+asweigart/pyperclip
+JesseAldridge/github_quality
+fabric/fabric
+sindresorhus/atom-jshint
+angular-ui-tree/angular-ui-tree
+boto/boto
+rupa/z
+lsegal/atom-runner

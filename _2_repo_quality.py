@@ -149,10 +149,6 @@ if __name__ == '__main__':
   #   'angular/angular.js', 'tax/python-requests-aws', 'django/django', 'mitsuhiko/flask',
   #   'npm/npm', 'asweigart/pyperclip', 'JesseAldridge/github_quality', 'fabric/fabric',
 
-  #   # python unit testing libs
-  #   'nose-devs/nose', 'gabrielfalcao/lettuce', 'pytest-dev/pytest', 'nose-devs/nose2',
-  #   'docopt/docopt', 'gabrielfalcao/sure', 'rlisagor/freshen', 'behave/behave',
-
   #   # libs I haven't tried much
   #   'Microsoft/TypeScript', 'meteor/meteor', 'facebook/react', 'angular/angular',
   #   'strongloop/express', 'dscape/nano', 'Level/levelup', 'felixge/node-mysql',

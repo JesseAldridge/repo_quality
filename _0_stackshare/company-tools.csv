@@ -1,0 +1,198 @@
+Pinterest,nginx
+Pinterest,Python
+Pinterest,React
+Pinterest,Java
+Pinterest,MySQL
+Pinterest,Amazon EC2
+Pinterest,Redis
+Pinterest,Amazon S3
+Pinterest,Django
+Pinterest,Go
+Pinterest,Backbone.js
+Pinterest,Objective-C
+Pinterest,Memcached
+Pinterest,Underscore
+Pinterest,Hadoop
+Pinterest,HBase
+Pinterest,Qubole
+Pinterest,mysql_utils
+Pinterest,Amazon CloudFront
+Pinterest,Amazon Route 53
+Pinterest,SparkPost
+Pinterest,EdgeCast
+Pinterest,BitBar
+Pinterest,DevOps
+Pinterest,Docker
+Pinterest,Webpack
+Pinterest,Varnish
+Pinterest,Xcode
+Pinterest,Pingdom
+Pinterest,Zookeeper
+Pinterest,Crittercism
+Pinterest,Teletraan
+Pinterest,Slack
+Pinterest,G Suite
+Pinterest,Jira
+Pinterest,Zendesk
+Pinterest,Asana
+Pinterest,OneLogin
+Pinterest,AnyPerk
+Pinterest,GrexIt
+Uber,jQuery
+Uber,nginx
+Uber,Node.js
+Uber,Python
+Uber,React
+Uber,Java
+Uber,MySQL
+Uber,PostgreSQL
+Uber,MongoDB
+Uber,Amazon EC2
+Uber,Redis
+Uber,Go
+Uber,Swift
+Uber,Backbone.js
+Uber,Objective-C
+Uber,Kafka
+Uber,Cassandra
+Uber,Hadoop
+Uber,Apache Spark
+Uber,Apache Thrift
+Uber,RIBs
+Uber,AresDB
+Uber,M3
+Uber,Google Analytics
+Uber,Elasticsearch
+Uber,Twilio SendGrid
+Uber,PayPal
+Uber,Mixpanel
+Uber,Optimizely
+Uber,Twilio
+Uber,Crazy Egg
+Uber,TensorFlow
+Uber,Heap
+Uber,Braintree
+Uber,HackerOne
+Uber,Ludwig
+Uber,RequireJS
+Uber,Sentry
+Uber,Grafana
+Uber,Terraform
+Uber,Prometheus
+Uber,Puppet Labs
+Uber,Nagios
+Uber,Zookeeper
+Uber,Graphite
+Uber,Jaeger
+Uber,Brunch
+Uber,uberalls
+Uber,Zap
+Uber,Makisu
+Uber,Peloton
+Uber,Kraken by Uber
+Uber,G Suite
+Uber,Zendesk
+Uber,Asana
+Uber,Mattermost
+Uber,OneLogin
+Uber,iDoneThis
+Uber,Delighted
+Airbnb,nginx
+Airbnb,JavaScript
+Airbnb,React
+Airbnb,Java
+Airbnb,MySQL
+Airbnb,Amazon EC2
+Airbnb,Redis
+Airbnb,Amazon S3
+Airbnb,Ruby
+Airbnb,Sass
+Airbnb,Rails
+Airbnb,Amazon RDS
+Airbnb,Hadoop
+Airbnb,Amazon ElastiCache
+Airbnb,Amazon EBS
+Airbnb,Airflow
+Airbnb,Presto
+Airbnb,Druid
+Airbnb,Native Navigation
+Airbnb,Airpal
+Airbnb,Google Analytics
+Airbnb,Amazon CloudFront
+Airbnb,Twilio SendGrid
+Airbnb,Amazon Route 53
+Airbnb,Mixpanel
+Airbnb,Twilio
+Airbnb,Visual Website Optimizer
+Airbnb,Braintree
+Airbnb,Lottie
+Airbnb,Nexmo
+Airbnb,Urban Airship
+Airbnb,Aerosolve
+Airbnb,DeepLinkDispatch
+Airbnb,GitHub
+Airbnb,New Relic
+Airbnb,Webpack
+Airbnb,Sentry
+Airbnb,Kibana
+Airbnb,Vagrant
+Airbnb,Amazon CloudWatch
+Airbnb,Logstash
+Airbnb,Datadog
+Airbnb,Jest
+Airbnb,Chef
+Airbnb,Enzyme
+Airbnb,Apache Mesos
+Airbnb,SmartStack
+Airbnb,Slack
+Airbnb,G Suite
+Airbnb,InVision
+Airbnb,Asana
+Airbnb,Campaign Monitor
+Airbnb,Superset
+Airbnb,React Sketch.app
+Airbnb,Assemblage
+LaunchDarkly,JavaScript
+LaunchDarkly,React
+LaunchDarkly,PostgreSQL
+LaunchDarkly,MongoDB
+LaunchDarkly,Amazon EC2
+LaunchDarkly,Redis
+LaunchDarkly,Firebase
+LaunchDarkly,Go
+LaunchDarkly,Amazon RDS
+LaunchDarkly,Kafka
+LaunchDarkly,Amazon DynamoDB
+LaunchDarkly,Underscore
+LaunchDarkly,Foundation
+LaunchDarkly,Amazon VPC
+LaunchDarkly,Amazon ElastiCache
+LaunchDarkly,TimescaleDB
+LaunchDarkly,Patroni
+LaunchDarkly,Pushpin
+LaunchDarkly,Google Analytics
+LaunchDarkly,Elasticsearch
+LaunchDarkly,Amazon Route 53
+LaunchDarkly,Mixpanel
+LaunchDarkly,Segment
+LaunchDarkly,Fastly
+LaunchDarkly,Amazon Kinesis
+LaunchDarkly,Amazon Elasticsearch Service
+LaunchDarkly,ReadMe.io
+LaunchDarkly,GitHub
+LaunchDarkly,Ansible
+LaunchDarkly,CircleCI
+LaunchDarkly,AWS Elastic Load Balancing (ELB)
+LaunchDarkly,Grafana
+LaunchDarkly,Terraform
+LaunchDarkly,HAProxy
+LaunchDarkly,Consul
+LaunchDarkly,Graphite
+LaunchDarkly,Spinnaker
+LaunchDarkly,LaunchDarkly
+LaunchDarkly,Honeycomb
+LaunchDarkly,Armory
+LaunchDarkly,Slack
+LaunchDarkly,G Suite
+LaunchDarkly,Confluence
+LaunchDarkly,Intercom
