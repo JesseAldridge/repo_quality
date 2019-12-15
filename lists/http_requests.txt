@@ -1,0 +1,4 @@
+sindresorhus/got
+sindresorhus/ky
+request/request
+psf/requests
