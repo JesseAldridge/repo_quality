@@ -7,3 +7,4 @@ auth0/node-jsonwebtoken
 Spyna/protect-rest-api-after-social-login
 26medias/social-login
 JesseAldridge/flask_simple_login
+derickbailey/mustbe
