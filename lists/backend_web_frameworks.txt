@@ -78,3 +78,5 @@ liferay/liferay-portal
 crystal-lang/crystal
 nodejs/node
 Pylons/pyramid
+zotonic/zotonic
+ChicagoBoss/ChicagoBoss
