@@ -1,0 +1,3 @@
+hacksparrow/safe-eval
+commenthol/safer-eval
+patriksimek/vm2
