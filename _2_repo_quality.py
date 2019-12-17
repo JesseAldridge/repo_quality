@@ -92,7 +92,7 @@ def pull_repo(repo_path, mean_stars_per_issue, auth=None, priority=False, ignore
 
     pulls = []
     for page in range(1, 100):
-      page_str = _0_hit_api.hit_api(
+      page_str = hit_api(
         repo_path,
         auth,
         '/pulls?page={}'.format(page),
