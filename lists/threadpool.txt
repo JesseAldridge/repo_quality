@@ -7,3 +7,4 @@ tghosgor/threadpool11
 wangy8961/python3-concurrency-pics-02
 lzpong/threadpool
 dgrr/GoSlaves
+josdejong/workerpool
