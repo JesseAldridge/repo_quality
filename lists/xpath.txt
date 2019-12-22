@@ -1,0 +1,6 @@
+goto100/xpath
+yaronn/xpath.js
+inikulin/parse5
+libxmljs/libxmljs
+cburgmer/xmlserializer
+xmldom/xmldom
