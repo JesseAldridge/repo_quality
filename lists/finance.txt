@@ -262,3 +262,8 @@ Yvictor/TradingGym
 zbarge/stocklook
 zhanggao2013/AmazingQuant
 zhiquan911/CHKLineChart
+quantopian/zipline
+quantopian/alphalens
+quantopian/pyfolio
+quantopian/research_public
+quantopian/trading_calendars
